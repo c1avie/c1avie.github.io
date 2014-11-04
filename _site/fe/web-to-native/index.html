@@ -2,23 +2,23 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Category Index &#8211; C1AVIE</title>
-<meta name="description" content="An archive of posts sorted by categories.">
-<meta name="keywords" content="Categories">
+<title>本地客户端调起解决方案 &#8211; C1AVIE</title>
+<meta name="description" content="Technology is a great servant but a terrible master.">
+<meta name="keywords" content="">
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="/images/omikron.png">
-<meta name="twitter:title" content="Category Index">
-<meta name="twitter:description" content="An archive of posts sorted by categories.">
+<meta name="twitter:title" content="本地客户端调起解决方案">
+<meta name="twitter:description" content="Technology is a great servant but a terrible master.">
 <meta name="twitter:creator" content="@c1avie">
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Category Index">
-<meta property="og:description" content="An archive of posts sorted by categories.">
-<meta property="og:url" content="/categories/index.html">
+<meta property="og:title" content="本地客户端调起解决方案">
+<meta property="og:description" content="Technology is a great servant but a terrible master.">
+<meta property="og:url" content="/fe/web-to-native">
 <meta property="og:site_name" content="C1AVIE">
 <meta property="og:image" content="/images/default_bg1.jpg">
 
@@ -26,7 +26,7 @@
 
 
 
-<link rel="canonical" href="/categories/">
+<link rel="canonical" href="/fe/web-to-native">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -63,7 +63,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
 
 </head>
-<body class="home-template" itemscope itemtype="http://schema.org/WebPage">
+<body class="post-template" itemscope itemtype="http://schema.org/WebPage">  
 <div id="fade"></div>
 <a id="slide" class="animated fade"></a>
 <aside id="sidebar">
@@ -134,204 +134,152 @@
     </div>
     
 </header>
-<div id="main" class="content" role="main" itemprop="mainContentOfPage">
+<div id="main" class="content" role="main" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/Blog">
     <div class="container">
         <div class="row">
-            <div class="page-body col-md-10 col-md-offset-1" itemprop="description">
-                <ul class="tag-box inline">
-  
-  
-     
-      <li><a href="#about">About <span>3</span></a></li>
-     
-      <li><a href="#fe">Fe <span>9</span></a></li>
-     
-      <li><a href="#rd">Rd <span>1</span></a></li>
-     
-      <li><a href="#ui">Ui <span>1</span></a></li>
-     
-      <li><a href="#other">Other <span>5</span></a></li>
-     
-      <li><a href="#javascript">Javascript <span>1</span></a></li>
-    
-  
+            <article class="post col-md-8 col-md-offset-2 hentry" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+            
+            
+            
+            
+            
+                    <header class="post-header entry-header">
+                    
+                        
+                        <h1 class="post-title text-center hyper lighter bordered-bottom entry-title" itemprop="headline">本地客户端调起解决方案</h1>
+                        
+                        <div class="cursive" style="color: #000; font-style:italic;"></div>
+                        <div class="post-info text-center small">
+                            <span class="entry-date date published updated"><time datetime="2014-05-22T23:24:07-04:00" class="post-time" itemprop="datePublished">22 May 2014</time><span>
+                            in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
+                        </div>
+                    </header>
+                    <div class="post-body bordered-bottom" itemprop="description">
+                        
+                        <p>最近做了一个本地客户端调起方案的调研，收获不少，总结一下,这里先不收调起协议之类的事。</p>
+<p>先说下之前的方案：</p>
+<p>Iphone：直接吊起以及暴力弹框。如果没有调起客户端，则出现弹框。如果成功调起客户端，则返回到页面中时触发pageshow事件，消除弹框。不过IOS uc浏览器不支持这个事件，因此返回到页面中时弹框会出现。</p>
+<p>Android及其它：首先检测是否安装了客户端。如果安装了的话，则调起本地客户端。如果没有安装，则提供下载。由于检测是否安装了客户端的成功率不高，即可能用户已经安装了客户端，但是没有检测出来。所以需要改进。</p>
+<p><code lang="javascript"><br />
+if (util.isIPhone()) {<br />
+me.appbutton.html('点击打开手机地图，省90%流量');<br />
+util.bindHrefStat(me.appbutton, function() {<br />
+$(document.body).append("<iframe id="callapp" style="border: 0; display: none;" src="baidumap://map/" width="0" height="0">");<br />
+window.a = setTimeout(function() {<br />
+util.DownBox.showTb();<br />
+}, 1500);<br />
+return false;<br />
+});<br />
+} else {<br />
+me.appbutton.attr('data', util.getClientUrl('download'));<br />
+util.isInstalledClient(function(openurl) {<br />
+me.appbutton.html('点击打开手机地图，省90%流量').attr('data', util.getNativeUrl());<br />
+me.appbutton.addClass("open");<br />
+util.bindHrefStat(me.appbutton, function() {<br />
+pbstat.addStat(COM_PB_STAT.TOP_BANNER, "click", {<br />
+is_install_clientapp: true,<br />
+os: me.os<br />
+});<br />
+});<br />
+}, function(downloadurl) {<br />
+me.appbutton.html($info).attr('data', downloadurl);<br />
+util.bindHrefStat(me.appbutton, function() {<br />
+pbstat.addStat(COM_PB_STAT.TOP_BANNER, "click", {<br />
+is_install_clientapp: false,<br />
+os: me.os<br />
+});<br />
+});<br />
+}, me.appbutton.attr('uid'));</p>
+<p>}<br />
+</iframe></code></p>
+<p>&nbsp;<br />
+中间的策略：</p>
+<p>IOS与Android都是直接调起以及暴力弹框，为支持android的uc和默认浏览器，新绑定了blur事件和visibilitychange事件。成功解决了android上uc和默认浏览器的显示问题。但是遗憾的是IOS uc浏览器对这几个事件都不支持。只能再想解决方案。</p>
+<p>参考资料：</p>
+<p>用户离开页面和回到页面事件（标签切换）</p>
+<p><a href="http://blog.csdn.net/do_it__/article/details/6983239">http://blog.csdn.net/do_it__/article/details/6983239</a></p>
+<p>html5 page visibility</p>
+<p><a href="http://jackyrong.iteye.com/blog/1300764">http://jackyrong.iteye.com/blog/1300764</a></p>
+<p>&nbsp;</p>
+<p>现在的解决方案：</p>
+<p>看了贴吧那边的webapp，在IOS下调起方案很好，不过他们在android下兼容性好像不行，都是直接下载的,无论安装客户端与否。于是找永霞联系了下贴吧那边的技术人员，并参阅了一些资料，找到了解决方案。</p>
+<p>Iphone下采用一个计时策略，如果调起了客户端，则时间会大于2000毫秒，不提供下载。如果没有调起，时间会小于2000毫秒，提供下载链接.</p>
+<p>测试情况：如果安装了对应的客户端，则浏览器均能打开应用；如果未安装，safari会首先弹出一个错误提醒，然后调用widow.location的代码，uc直接调用window.location这行代码。</p>
+<p>Android则是直接调起与暴力弹框，调起客户端回到页面中时通过触发事件消除弹框。</p>
+<p><code lang="javascript"><br />
+me.appbutton.html('点击打开手机地图，省90%流量');<br />
+if(util.isIPhone()) {<br />
+util.bindHrefStat(me.appbutton, function() {<br />
+$(document.body).append("<iframe src="baidumap://map/" id="callapp" width="0" height="0" style="border: 0;display: none;">");<br />
+var clickedAt = +new Date;<br />
+setTimeout(function(){<br />
+!window.document.webkitHidden && setTimeout(function(){<br />
+if (+new Date - clickedAt < 2000){<br />
+window.location = 'http://itunes.apple.com/cn/app/id452186370?ls=1&mt=8';<br />
+}<br />
+}, 500);<br />
+}, 500)<br />
+return false;<br />
+});<br />
+}<br />
+else {<br />
+util.bindHrefStat(me.appbutton, function() {<br />
+$(document.body).append("<iframe src="baidumap://map/" id="callapp" width="0" height="0" style="border: 0;display: none;">");<br />
+window.a = setTimeout(function() {<br />
+util.DownBox.showTb();<br />
+}, 1500);</p>
+<p>return false;<br />
+});<br />
+}<br />
+</iframe></iframe></code></p>
+<p>参考资料：<br />
+<a href="http://liushuibird.blog.163.com/blog/static/1241915612013810113326699/">http://liushuibird.blog.163.com/blog/static/1241915612013810113326699/</a></p>
+<p>项目Demo(限内网):<br />
+<a href="http://cp01-rdqa-dev010.cp01.baidu.com:8088/mobile/webapp/index/index">http://cp01-rdqa-dev010.cp01.baidu.com:8088/mobile/webapp/index/index</a></p>
+<p>&nbsp;</p>
 
-</ul>
-
- 
-  <h2 id="about" style="color: #c91b26">About</h2>
-  <ul class="post-list">
-      
-    
-      
-      
-      <li><a href="/about/late-note">迟到的笔记<span class="entry-date"><time datetime="2014-05-16T22:43:11-04:00" itemprop="datePublished">May 16, 2014</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/about/2012-summary">2012总结<span class="entry-date"><time datetime="2012-12-31T11:44:39-05:00" itemprop="datePublished">December 31, 2012</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/about/about-blog">关于博客<span class="entry-date"><time datetime="2012-12-31T08:27:08-05:00" itemprop="datePublished">December 31, 2012</time></a></li>
-      
-      
-    
-    
-    
-  </ul>
- 
-  <h2 id="fe" style="color: #c91b26">Fe</h2>
-  <ul class="post-list">
-      
-    
-      
-      
-      <li><a href="/fe/web-to-native">本地客户端调起解决方案<span class="entry-date"><time datetime="2014-05-22T23:24:07-04:00" itemprop="datePublished">May 22, 2014</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/fe/drag">拖拽<span class="entry-date"><time datetime="2014-02-14T02:44:44-05:00" itemprop="datePublished">February 14, 2014</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/fe/cover">遮罩层<span class="entry-date"><time datetime="2014-02-14T02:02:02-05:00" itemprop="datePublished">February 14, 2014</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/fe/uc2014-interview">几道前端试题<span class="entry-date"><time datetime="2013-10-07T05:26:12-04:00" itemprop="datePublished">October 07, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/fe/jstime">js&&time<span class="entry-date"><time datetime="2013-06-13T02:22:28-04:00" itemprop="datePublished">June 13, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/fe/IE6-cache">解决ie6下的背景图片缓存问题<span class="entry-date"><time datetime="2013-02-25T03:46:12-05:00" itemprop="datePublished">February 25, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/fe/js-screen-width">js获取屏幕宽度高度<span class="entry-date"><time datetime="2013-01-15T11:56:43-05:00" itemprop="datePublished">January 15, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/fe/element-move">元素移动<span class="entry-date"><time datetime="2013-01-10T06:28:22-05:00" itemprop="datePublished">January 10, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/fe/ie-onmouseover-bug">IE下的onmouseover bug<span class="entry-date"><time datetime="2012-12-31T08:35:14-05:00" itemprop="datePublished">December 31, 2012</time></a></li>
-      
-      
-    
-    
-    
-  </ul>
- 
-  <h2 id="rd" style="color: #c91b26">Rd</h2>
-  <ul class="post-list">
-      
-    
-      
-      
-      <li><a href="/rd/wordpress-near">在外部如何调去wordpress的近期文章<span class="entry-date"><time datetime="2013-01-22T05:20:58-05:00" itemprop="datePublished">January 22, 2013</time></a></li>
-      
-      
-    
-    
-    
-  </ul>
- 
-  <h2 id="ui" style="color: #c91b26">Ui</h2>
-  <ul class="post-list">
-      
-    
-      
-      
-      <li><a href="/ui/a-maiden-work-of-ui">A maiden work of UI<span class="entry-date"><time datetime="2013-03-16T03:45:48-04:00" itemprop="datePublished">March 16, 2013</time></a></li>
-      
-      
-    
-    
-    
-  </ul>
- 
-  <h2 id="other" style="color: #c91b26">Other</h2>
-  <ul class="post-list">
-      
-    
-      
-      
-      <li><a href="/other/just-summary">也算是个总结吧<span class="entry-date"><time datetime="2013-07-11T04:47:32-04:00" itemprop="datePublished">July 11, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/other/wordpress-changehome">wordpress搬家<span class="entry-date"><time datetime="2013-06-03T09:06:53-04:00" itemprop="datePublished">June 03, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/other/uci-am-comming">UC实习<span class="entry-date"><time datetime="2013-05-10T05:10:41-04:00" itemprop="datePublished">May 10, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/other/fail-interview">记两次失败的面试经历<span class="entry-date"><time datetime="2013-04-27T00:13:21-04:00" itemprop="datePublished">April 27, 2013</time></a></li>
-      
-      
-    
-      
-      
-      <li><a href="/other/my-first-interview">My first interview<span class="entry-date"><time datetime="2013-04-04T02:56:54-04:00" itemprop="datePublished">April 04, 2013</time></a></li>
-      
-      
-    
-    
-    
-  </ul>
- 
-  <h2 id="javascript" style="color: #c91b26">Javascript</h2>
-  <ul class="post-list">
-      
-    
-      
-      
-      <li><a href="/javascript/prototype-constructor">带原型的Constructor<span class="entry-date"><time datetime="2014-11-04T00:00:00-05:00" itemprop="datePublished">November 04, 2014</time></a></li>
-      
-      
-    
-    
-    
-  </ul>
-
-            </div>    
+                        <br>
+                    
+                    
+                    </div>
         </div>
+                    <footer class="post-footer entry-meta">
+                        <div class="post-share text-center">
+    <p class="light small">
+        Share this post
+    </p>
+    <ul class="social-mini">
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=&quot;本地客户端调起解决方案&quot;%20/fe/web-to-native%20via%20&#64;c1avie"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" data-toggle="tooltip" title="Share on Twitter" itemprop="Twitter">
+                <i class="icon-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a  href="https://www.facebook.com/sharer/sharer.php?u=/fe/web-to-native"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" data-toggle="tooltip" title="Share on Facebook" itemprop="Facebook">
+                <i class="icon-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://plus.google.com/share?url=/fe/web-to-native"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" data-toggle="tooltip" title="Share on Google plus" itemprop="GooglePlus">
+                <i class="icon-google-plus"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+                        <div class="post-author text-center">                       
+	        <img src="/images/c1avie.JPG" alt="ZAN NIU's photo" itemprop="image" class="post-avatar img-circle img-responsive"/>    
+	    <h4 class="bordered-bottom vcard author" itemprop="author" itemscope itemtype="http://schema.org/Person">By <span itemprop="name" class="fn"><a href="/about" title="About ZAN NIU" itemprop="url">ZAN NIU</a></span></h4>
+	    <p>this is c1avie.</p>
+</div> 
+                        
+                    </footer>
+            </article>
     </div>
 </div>
-    
+
 <footer id="footer"  class="blog-background overlay text-center align-middle animated from-top" style="background-image: url(/images/default_bg1.jpg)" >
 
 
@@ -422,6 +370,7 @@
     
 </footer>
 
+    
 <script type="text/javascript" src="/assets/js/vendor/jquery-1.9.1.min.js"></script>
 <script src="/assets/js/scripts.min.js"></script>
 <script type="text/javascript" src="/assets/js/waypoints.min.js"></script>
@@ -491,6 +440,6 @@ $("a#click-pages").click(function(){
 </script>
 
 
-  
+ 
 </body>
 </html>

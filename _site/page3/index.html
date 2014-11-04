@@ -18,7 +18,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Latest Posts">
 <meta property="og:description" content="The personal blog of Hossain Mohd. Faysal, a doctoral candidate in Electrical Engineering at University of Pennsylvania.">
-<meta property="og:url" content="/index.html">
+<meta property="og:url" content="/page3/index.html">
 <meta property="og:site_name" content="C1AVIE">
 <meta property="og:image" content="/images/default_bg1.jpg">
 
@@ -26,7 +26,7 @@
 
 
 
-<link rel="canonical" href="/">
+<link rel="canonical" href="/page3/">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -162,40 +162,23 @@
 	               
 	                    
 	                    <h2 class="post-title text-center super lighter bordered-bottom">
-	                        <a href="/javascript/prototype-constructor">带原型的Constructor</a>
+	                        <a href="/ui/a-maiden-work-of-ui">A maiden work of UI</a>
 	                    
 	                    </h2>
 	                    <div class="post-info text-center small">
-	                        <time datetime="2014-11-04T00:00:00-05:00" class="post-time">04 Nov 2014</time>
-	                        in <span class="post-tags"><a href="/categories/index.html#javascript" data-toggle="tooltip" title="Other posts from the Javascript category" rel="tag">Javascript</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
+	                        <time datetime="2013-03-16T03:45:48-04:00" class="post-time">16 Mar 2013</time>
+	                        in <span class="post-tags"><a href="/categories/index.html#ui" data-toggle="tooltip" title="Other posts from the Ui category" rel="tag">Ui</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
 	                    </div>
 	                </header>
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                    <p>JavaScript有一个prototype的属性,调用JavaScript构造器创建一个对象后，新对象就会具有构造器的所有属性。通过这种方式，可以创建多个Car对象，并访问相同的原型。
+	                    <p>This is my first time doing the design for Web page.It cost me about five hours today.Although it is still rough,I satisfied it.I learn a lot from practiong.Thanks my team to help me.
 
-function Person(name, sex, age) {
-	this.name = name;
-	this.sex = sex;
-	this.age = age;
-}
-
-Person.prototype.toString = function() {
-	return this.name + &quot; is a &quot; + this.sex + &quot;,age is &quot; + this.age;
-}
-
-var c1avie = new Person(&quot;c1avie&quot;,&quot;male&quot;,1991);
-var niuzan = new Person(&quot;niuzan&quot;,&quot;male&quot;,1992);
-
-console.log(c1avie.toString());
-console.log(niuzan.toString());
-
-现在toString()的单一实例就能在所有Person对象之间共享
 &hellip;</p>
 	                    <div class="text-center">
 	                    
-		                <a href="/javascript/prototype-constructor" data-toggle="tooltip" title="" class="more-link btn btn-danger btn-large">
+		                <a href="/ui/a-maiden-work-of-ui" data-toggle="tooltip" title="Read more about A maiden work of UI" class="more-link btn btn-danger btn-large">
 		                    <i class="icon-link"></i> read more...
 		                </a>
 		                
@@ -221,21 +204,33 @@ console.log(niuzan.toString());
 	               
 	                    
 	                    <h2 class="post-title text-center super lighter bordered-bottom">
-	                        <a href="/fe/web-to-native">本地客户端调起解决方案</a>
+	                        <a href="/fe/IE6-cache">解决ie6下的背景图片缓存问题</a>
 	                    
 	                    </h2>
 	                    <div class="post-info text-center small">
-	                        <time datetime="2014-05-22T23:24:07-04:00" class="post-time">22 May 2014</time>
+	                        <time datetime="2013-02-25T03:46:12-05:00" class="post-time">25 Feb 2013</time>
 	                        in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
 	                    </div>
 	                </header>
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                    <p>最近做了一个本地客户端调起方案的调研，收获不少，总结一下,这里先不收调起协议之类的事。 先说下之前的方案： Iphone：直接吊起以及暴力弹框。如果没有调起客户端，则出现弹框。如果成功调起客户端，则返回到页面中时触发pageshow事件，消除弹框。不过IOS uc浏览器不支持这个事件，因此返回到页面中时弹框会出现。 Android及其它：首先检测是否安装了客户端。如果安装了的话，则调起本地客户端。如果没有安装，则提供下载。由于检测是否安装了客户端的成功率不高，即可能用户已经安装了客户端，但是没有检测出来。所以需要改进。 if (util.isIPhone()) { me.appbutton.html('点击打开手机地图，省90%流量'); util.bindHrefStat(me.appbutton, function() { $(document.body).append(""); window.a = setTimeout(function() { util.DownBox.showTb(); }, 1500); return false; }); } else { me.appbutton.attr('data', util.getClientUrl('download')); util.isInstalledClient(function(openurl) { me.appbutton.html('点击打开手机地图，省90%流量').attr('data', util.getNativeUrl()); me.appbutton.addClass("open"); util.bindHrefStat(me.appbutton, function() { pbstat.addStat(COM_PB_STAT.TOP_BANNER, "click", { is_install_clientapp: true, os: me.os }); }); }, function(downloadurl) { me.appbutton.html($info).attr('data', downloadurl); util.bindHrefStat(me.appbutton, function() { pbstat.addStat(COM_PB_STAT.TOP_BANNER, "click", { is_install_clientapp: false, os: me.os }); }); }, me.appbutton.attr('uid')); } &nbsp; 中间的策略： IOS与Android都是直接调起以及暴力弹框，为支持android的uc和默认浏览器，新绑定了blur事件和visibilitychange事件。成功解决了android上uc和默认浏览器的显示问题。但是遗憾的是IOS uc浏览器对这几个事件都不支持。只能再想解决方案。 参考资料： 用户离开页面和回到页面事件（标签切换） http://blog.csdn.net/do_it__/article/details/6983239 html5 page visibility http://jackyrong.iteye.com/blog/1300764 &nbsp; 现在的解决方案： 看了贴吧那边的webapp，在IOS下调起方案很好，不过他们在android下兼容性好像不行，都是直接下载的,无论安装客户端与否。于是找永霞联系了下贴吧那边的技术人员，并参阅了一些资料，找到了解决方案。 Iphone下采用一个计时策略，如果调起了客户端，则时间会大于2000毫秒，不提供下载。如果没有调起，时间会小于2000毫秒，提供下载链接. 测试情况：如果安装了对应的客户端，则浏览器均能打开应用；如果未安装，safari会首先弹出一个错误提醒，然后调用widow.location的代码，uc直接调用window.location这行代码。 Android则是直接调起与暴力弹框，调起客户端回到页面中时通过触发事件消除弹框。 me.appbutton.html('点击打开手机地图，省90%流量'); if(util.isIPhone()) { util.bindHrefStat(me.appbutton, function() { $(document.body).append(""); var clickedAt = +new Date; setTimeout(function(){ !window.document.webkitHidden && setTimeout(function(){ if (+new...&hellip;</p>
+	                    <p>E6下的背景图片每次使用都会重新发送请求，这会很影响代码的效率，用Css或Js可以解决这个问题
+用CSS实现：
+html {filter:expression(document.execCommand("BackgroundImageCache", false, true));}
+用JS实现：
+&lt;script type="text/javascript"&gt;
+// IE6 background image caching fix.
+// Include this JavaScript a the top of your page.
+try {
+document.execCommand("BackgroundImageCache", false, true);
+} catch(e) {}
+&lt;/script&gt;
+&nbsp;
+&hellip;</p>
 	                    <div class="text-center">
 	                    
-		                <a href="/fe/web-to-native" data-toggle="tooltip" title="Read more about 本地客户端调起解决方案" class="more-link btn btn-danger btn-large">
+		                <a href="/fe/IE6-cache" data-toggle="tooltip" title="Read more about 解决ie6下的背景图片缓存问题" class="more-link btn btn-danger btn-large">
 		                    <i class="icon-link"></i> read more...
 		                </a>
 		                
@@ -261,209 +256,183 @@ console.log(niuzan.toString());
 	               
 	                    
 	                    <h2 class="post-title text-center super lighter bordered-bottom">
-	                        <a href="/about/late-note">迟到的笔记</a>
+	                        <a href="/rd/wordpress-near">在外部如何调去wordpress的近期文章</a>
 	                    
 	                    </h2>
 	                    <div class="post-info text-center small">
-	                        <time datetime="2014-05-16T22:43:11-04:00" class="post-time">16 May 2014</time>
+	                        <time datetime="2013-01-22T05:20:58-05:00" class="post-time">22 Jan 2013</time>
+	                        in <span class="post-tags"><a href="/categories/index.html#rd" data-toggle="tooltip" title="Other posts from the Rd category" rel="tag">Rd</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
+	                    </div>
+	                </header>
+	                <div class="post-body bordered-bottom">
+	                
+	                
+	                    <p>这里介绍一个我自己写的一个接口，
+先填写一些连接数据库的基本配置
+
+&nbsp;
+接着就是连接了，
+其中mysql_query("SET NAMES utf8");防止文字乱码
+接着就是输出了
+我想输出去我在博客中发布的5篇文章的题目，因此有了以上代码
+其中guid为表wp_posts的title
+&hellip;</p>
+	                    <div class="text-center">
+	                    
+		                <a href="/rd/wordpress-near" data-toggle="tooltip" title="Read more about 在外部如何调去wordpress的近期文章" class="more-link btn btn-danger btn-large">
+		                    <i class="icon-link"></i> read more...
+		                </a>
+		                
+		                </div>
+	                </div>
+	            </article>
+	        </div>
+			
+	
+		
+		
+		
+		
+		
+			
+	        
+	        
+	        
+	        
+	        <div class="row">
+	            <article class="post post col-md-8 col-md-offset-2">
+	               <header class="post-header">
+	               
+	                    
+	                    <h2 class="post-title text-center super lighter bordered-bottom">
+	                        <a href="/fe/js-screen-width">js获取屏幕宽度高度</a>
+	                    
+	                    </h2>
+	                    <div class="post-info text-center small">
+	                        <time datetime="2013-01-15T11:56:43-05:00" class="post-time">15 Jan 2013</time>
+	                        in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
+	                    </div>
+	                </header>
+	                <div class="post-body bordered-bottom">
+	                
+	                
+	                    <p>今天在想着怎么实现背景图片随着电脑屏幕的变化而自适应的时候，就想知道电脑屏幕的分辨率为多少。它的尺寸可以有很多种方法获得，查阅资料总结了下：
+在google浏览器中按F12到console中
+
+获取屏幕分辨率：alert(screen.width);  alert(screen.height);  我试了下width大写，报undefined，看来严格区分大小写。
+获取屏幕可用大小：alert(screen.availWidth);  alert(screen.availHeight);
+获取网页可见域宽高：alert(document.body.clientWidth);  alert(document.body.clientHeight);
+获取网页可见区域宽(包括边线的宽)：alert(document.body.offsetWidth);
+获取网页可见区域高(包括边线的宽)：alert(document.body.offsetHeight);
+获取网页正文全文宽：alert(document.body.scrollWidth);
+获取网页正文全文高：alert(document.body.scrollHeight);
+获取网页被卷去的高：alert(document.body.scrollTop);
+获取网页被卷去的左：alert(document.body.scrollLeft);
+获取网页正文部分上：alert(window.screenTop);
+获取网页正文部分左：alert(window.screenLeft);
+获取屏幕分辨率的宽：alert(window.screen.width);
+获取屏幕分辨率的高：alert(window.screen.height);
+获取屏幕可用工作区宽度：alert(window.screen.availWidth);
+获取屏幕可用工作区高度：alert(window.screen.availHeight);
+&hellip;</p>
+	                    <div class="text-center">
+	                    
+		                <a href="/fe/js-screen-width" data-toggle="tooltip" title="Read more about js获取屏幕宽度高度" class="more-link btn btn-danger btn-large">
+		                    <i class="icon-link"></i> read more...
+		                </a>
+		                
+		                </div>
+	                </div>
+	            </article>
+	        </div>
+			
+	
+		
+		
+		
+		
+		
+			
+	        
+	        
+	        
+	        
+	        <div class="row">
+	            <article class="post post col-md-8 col-md-offset-2">
+	               <header class="post-header">
+	               
+	                    
+	                    <h2 class="post-title text-center super lighter bordered-bottom">
+	                        <a href="/fe/element-move">元素移动</a>
+	                    
+	                    </h2>
+	                    <div class="post-info text-center small">
+	                        <time datetime="2013-01-10T06:28:22-05:00" class="post-time">10 Jan 2013</time>
+	                        in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
+	                    </div>
+	                </header>
+	                <div class="post-body bordered-bottom">
+	                
+	                <p class = "lead">一个方向键控制元素移动的函数
+但是经过多次尝试终于找出了问题所在.
+
+style.left并不能获取元素的左偏移量,alert之后始终是undefined.
+最后查阅了下发现style并不能获取外部样式中left值
+需要写成这样
+
+当然用jquery获取也行
+
+
+
+&hellip;</p>
+	                    <div class="text-center">
+	                    
+		                <a href="/fe/element-move" data-toggle="tooltip" title="Read more about 元素移动" class="more-link btn btn-danger btn-large">
+		                    <i class="icon-link"></i> read more...
+		                </a>
+		                
+		                </div>
+	                </div>
+	            </article>
+	        </div>
+			
+	
+		
+		
+		
+		
+		
+			
+	        
+	        
+	        
+	        
+	        <div class="row">
+	            <article class="post post col-md-8 col-md-offset-2">
+	               <header class="post-header">
+	               
+	                    
+	                    <h2 class="post-title text-center super lighter bordered-bottom">
+	                        <a href="/about/2012-summary">2012总结</a>
+	                    
+	                    </h2>
+	                    <div class="post-info text-center small">
+	                        <time datetime="2012-12-31T11:44:39-05:00" class="post-time">31 Dec 2012</time>
 	                        in <span class="post-tags"><a href="/categories/index.html#about" data-toggle="tooltip" title="Other posts from the About category" rel="tag">About</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
 	                    </div>
 	                </header>
 	                <div class="post-body bordered-bottom">
 	                
-	                <p class = "lead">好久没写东西了，昨天跟我们组大二、大一的学弟学妹做了个实习分享。才发现自己应该把一些东西记下来，不管是总结也好，缅怀也好。
-我是3.26入职的，大概实习了一个月，因为考试就回来了，准备明天再过去。我们组主要是做百度地图webapp的，附上网址：http://map.baidu.com/mobile/webapp/index/index
-我们组的传统是新人前两周学习webapp的框架代码superman，它是基于fis的，想了解fis的同学可以参考：http://fis.baidu.com/
-学习的过程中深入理解了很多新的概念，比如单页系统、BigPipe、quicking等，收获还是挺多的。
-后面跟着我们组的才女加美女旖涵一起完成了扫雷4号项目，北大的果然名不虚传，坐地铁都抱本书看，膜拜ing。
-附上学习两周后的代码串讲PPT：牛赞-webapp代码学习串讲
-附上在北京的一些生活照，哈哈
-[caption id="attachment_281" align="alignnone" width="168"] 在后海[/caption]
-[caption id="attachment_282" align="alignnone" width="168"] 清华大学[/caption]
-[caption id="attachment_288" align="alignnone" width="168"] 北京的日落[/caption]
-[caption id="attachment_291" align="alignnone" width="168"] 陈功学长的猫猫[/caption]
-[caption id="attachment_287" align="alignnone" width="168"] 颐和园[/caption]
-[caption id="attachment_284" align="alignnone" width="168"] 星哥大厨啊[/caption]
-
-
+	                
+	                    <p>2012结束了,感觉很想写点什么.纪念逝去的2012.大一下的很多事都记不太清了.我努力的回忆一下,貌似还真的记不清了.可能也没什么特别出彩的事吧,看来有些东西还真的需要记录一下.记忆这东西不靠谱.噢,对那个寒假还有点印象,那好像是我最努力的一个假期了吧,在那期间学习了java以及js等,虽然很渣.然后慢慢的从java web转到前端去了.前端真的是一个妙不可言的领域,并渐渐的爱上了它.一直坚持到了现在.
+再让我感受深刻的就是暑假了,当时"助跑网","肥羊地图"地图这两个项目快把我给整死,天天被逼着做静态页面,但还是坚持下来了.也有过很美好的回忆,或许很多年后我仍我记得,真心的想说声谢谢.大概8.17号才回的家,错过了很多同学聚会.但觉得还是挺充实的.
+也没在家呆了几天,就被同学拉到学校参加"数学建模比赛",我是纯粹打酱油的.这和后来的一个挑战杯让我深刻的认识到如果你不喜欢做这个,你不尽心去做这个,你是不会有收获的.还不如不做.
+学习方面嘛,感觉js,php的进展太缓慢了点,虽然知道这事也不能急,得慢慢来.总是有太多的事.还是要多多看书.js,php要抓起来.
+先到这吧.再见,2012.你好,2013.
 &hellip;</p>
 	                    <div class="text-center">
 	                    
-		                <a href="/about/late-note" data-toggle="tooltip" title="Read more about 迟到的笔记" class="more-link btn btn-danger btn-large">
-		                    <i class="icon-link"></i> read more...
-		                </a>
-		                
-		                </div>
-	                </div>
-	            </article>
-	        </div>
-			
-	
-		
-		
-		
-		
-		
-			
-	        
-	        
-	        
-	        
-	        <div class="row">
-	            <article class="post post col-md-8 col-md-offset-2">
-	               <header class="post-header">
-	               
-	                    
-	                    <h2 class="post-title text-center super lighter bordered-bottom">
-	                        <a href="/fe/drag">拖拽</a>
-	                    
-	                    </h2>
-	                    <div class="post-info text-center small">
-	                        <time datetime="2014-02-14T02:44:44-05:00" class="post-time">14 Feb 2014</time>
-	                        in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
-	                    </div>
-	                </header>
-	                <div class="post-body bordered-bottom">
-	                
-	                
-	                    <p>拖拽的基本原理： 当mousedown时记下鼠标点击位置离拖拽容器左边沿的距离和上边沿的距离，即tmpX,tmpY；mousemove时通过定位拖拽容器的style.left/style.top，使拖拽容器进行移动，定位到哪里则由刚刚的tmpX/tmpY和当前鼠标所在位置计算得出；mouseup时，结束移动。 设置拖拽容器可拖拽的范围，若未设置，则默认为当前窗口可视范围。Note：在设置范围的时候使用Math.max/min来处理，而不是用If语句判断，用后者的话会导致快速拖拽时未达到容许范围边沿即停止的状况。 Html代码： drag me Css代码： #box{position:absolute; left:100px; top:100px; padding:5px; background:#f0f3f9; font-size:12px; -moz-box-shadow:2px 2px 4px #666666; -webkit-box-shadow:2px 2px 4px #666666;width: 100px;height: 100px;} Javascript代码： var params = { left: 100, top: 100, currentX: 0, currentY: 0, flag: false }; var obox = document.getElementById("box"); Dragme(obox); //拖拽的实现 function Dragme(boxdrag){ //o是移动对象 boxdrag.onmousedown = function(event){ params.flag = true; var e = event; params.currentX = e.clientX; params.currentY = e.clientY; }; document.onmouseup = function(){ params.flag = false; params.left = boxdrag.style.left; params.top = boxdrag.style.top; }; document.onmousemove = function(event){ var e = event ? event: window.event; if(params.flag){ var nowX = e.clientX, nowY = e.clientY; var disX = nowX...&hellip;</p>
-	                    <div class="text-center">
-	                    
-		                <a href="/fe/drag" data-toggle="tooltip" title="Read more about 拖拽" class="more-link btn btn-danger btn-large">
-		                    <i class="icon-link"></i> read more...
-		                </a>
-		                
-		                </div>
-	                </div>
-	            </article>
-	        </div>
-			
-	
-		
-		
-		
-		
-		
-			
-	        
-	        
-	        
-	        
-	        <div class="row">
-	            <article class="post post col-md-8 col-md-offset-2">
-	               <header class="post-header">
-	               
-	                    
-	                    <h2 class="post-title text-center super lighter bordered-bottom">
-	                        <a href="/fe/cover">遮罩层</a>
-	                    
-	                    </h2>
-	                    <div class="post-info text-center small">
-	                        <time datetime="2014-02-14T02:02:02-05:00" class="post-time">14 Feb 2014</time>
-	                        in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
-	                    </div>
-	                </header>
-	                <div class="post-body bordered-bottom">
-	                
-	                
-	                    <p>html代码： 关闭 挑战一下 css代码： /*弹出层部分*/ #box {display: none;position: absolute;width: 440px;height: 284px;background: url(../images/layer.jpg) no-repeat;z-index: 200; } #closeBtn {position: absolute;right: 10px;top: 10px;cursor: pointer;color: #000 ; } #greybackground {background: #000;display: block;z-index: 100;width: 100%;position: absolute;top: 0;left: 0; } #box p {position: absolute;left: 180px;bottom: 40px;} #box p a {color: #fff;font-size: 16px;text-decoration: underline;} #box p a:hover {text-decoration: none;} js代码： $(function(){ 　　var screenwidth,screenheight,mytop,getPosLeft,getPosTop; 　　screenwidth = $(window).width(); 　　screenheight = $(window).height(); 　　mytop = $(document).scrollTop(); 　　getPosLeft = screenwidth/2 - 220; 　　getPosTop = screenheight/2 - 142; 　　$("#box").css({"left":getPosLeft,"top":getPosTop}); $(window).resize(function(){ 　　screenwidth = $(window).width(); 　　screenheight = $(window).height(); 　　mytop = $(document).scrollTop(); 　　getPosLeft = screenwidth/2 - 220; 　　getPosTop = screenheight/2 - 142; 　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop}); }); 　　$(window).scroll(function(){ 　　screenwidth...&hellip;</p>
-	                    <div class="text-center">
-	                    
-		                <a href="/fe/cover" data-toggle="tooltip" title="Read more about 遮罩层" class="more-link btn btn-danger btn-large">
-		                    <i class="icon-link"></i> read more...
-		                </a>
-		                
-		                </div>
-	                </div>
-	            </article>
-	        </div>
-			
-	
-		
-		
-		
-		
-		
-			
-	        
-	        
-	        
-	        
-	        <div class="row">
-	            <article class="post post col-md-8 col-md-offset-2">
-	               <header class="post-header">
-	               
-	                    
-	                    <h2 class="post-title text-center super lighter bordered-bottom">
-	                        <a href="/fe/uc2014-interview">几道前端试题</a>
-	                    
-	                    </h2>
-	                    <div class="post-info text-center small">
-	                        <time datetime="2013-10-07T05:26:12-04:00" class="post-time">07 Oct 2013</time>
-	                        in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
-	                    </div>
-	                </header>
-	                <div class="post-body bordered-bottom">
-	                
-	                
-	                    <p>1.下面的代码输出结构分别是什么
-
-function Person() {
-this.myName = 'Tom';
-}
-Person.prototype.sayName = function() {
-var myName = 'Jerry';
-console.log(this.myName);
-}
-Person.prototype.sayHello = function() {
-setTimeout(this.sayName,100);
-}
-var p = new Person();
-p.sayName();
-p.sayHello();
-
-上面的代码输出结果为Tom和undefined 后面为undefined是因为没有正确调用方法，将setTimeout(this.sayName,100)改为setTimeout(this.sayName（）,100)就能正确返回Tom了
-2.以下是一段js代码，其中element是一个dom元素。请说出该函数是否存在问题，如果有，请指出问题所在，并提供解决方案。
-
-function foo(element) {
-var str = 'uc';
-element.onclick = function() {
-console.log(str + element.tagName);
-};
-}
-
-该函数为元素绑定了一个onclick事件，但是如果后面想继续为该元素绑定事件时，事件会被覆盖 解决方法是
-
-var header = document.getElementById("header");
-addEvent(header,'click',test);
-function addEvent(element,ev,func) {
-if(element.attachEvent) {
-element.attachEvent('on' + ev,function() {
-func();
-});
-}
-else {
-element.addEventListener(ev,function(event) {
-func();
-});
-}
-}
-function test() {
-alert("test");
-}
-
-3.请用js实现对象的深度克隆
-查了下资料，这里有篇资料讲的挺好的
-http://sentsin.com/web/21.html
-4.设计一个页面的布局
-a)页面自适应屏幕宽度
-b)侧边栏固定宽度300px,其他元素均自适应宽度
-c）页头、导航栏、页脚固定宽度40px，正文部分按内容自动撑高
-具体可参见https://github.com/c1avie/UC2014
-&hellip;</p>
-	                    <div class="text-center">
-	                    
-		                <a href="/fe/uc2014-interview" data-toggle="tooltip" title="Read more about 几道前端试题" class="more-link btn btn-danger btn-large">
+		                <a href="/about/2012-summary" data-toggle="tooltip" title="Read more about 2012总结" class="more-link btn btn-danger btn-large">
 		                    <i class="icon-link"></i> read more...
 		                </a>
 		                
@@ -478,9 +447,13 @@ c）页头、导航栏、页脚固定宽度40px，正文部分按内容自动撑
             <div class="col-md-8 col-md-offset-2">
                 <nav class="pagination" role="navigation">
 
-    <span class="page-number">Page 1 of 4</span>
+
+		<a class="newer-posts" href="/page2">&larr; Newer Posts</a>
+
+
+    <span class="page-number">Page 3 of 4</span>
     
-        <a class="older-posts" href="/page2">Older Posts &rarr;</a>
+        <a class="older-posts" href="/page4">Older Posts &rarr;</a>
  
 </nav>
             </div>
