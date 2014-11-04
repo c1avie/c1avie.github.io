@@ -1,0 +1,39 @@
+---
+layout: post
+title: js获取屏幕宽度高度
+date: 2013-01-16 00:56:43.000000000 +08:00
+categories:
+- FE
+tags:
+- console
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  duoshuo_thread_id: '1203060334345060362'
+author:
+  login: C1avie
+  email: 429465251@qq.com
+  display_name: C1avie
+  first_name: ''
+  last_name: ''
+---
+<p>今天在想着怎么实现背景图片随着电脑屏幕的变化而自适应的时候，就想知道电脑屏幕的分辨率为多少。它的尺寸可以有很多种方法获得，查阅资料总结了下：</p>
+<p>在google浏览器中按F12到console中</p>
+<p><a href="http://www.c1avie.com/blog/?attachment_id=65" rel="attachment wp-att-65"><img class="alignnone size-full wp-image-65" alt="console" src="assets/console1.jpg" width="832" height="197" /></a></p>
+<p>获取屏幕分辨率：alert(screen.width);  alert(screen.height);  我试了下width大写，报undefined，看来严格区分大小写。</p>
+<p>获取屏幕可用大小：alert(screen.availWidth);  alert(screen.availHeight);</p>
+<p>获取网页可见域宽高：alert(document.body.clientWidth);  alert(document.body.clientHeight);</p>
+<p>获取网页可见区域宽(包括边线的宽)：alert(document.body.offsetWidth);</p>
+<p>获取网页可见区域高(包括边线的宽)：alert(document.body.offsetHeight);</p>
+<p>获取网页正文全文宽：alert(document.body.scrollWidth);</p>
+<p>获取网页正文全文高：alert(document.body.scrollHeight);</p>
+<p>获取网页被卷去的高：alert(document.body.scrollTop);</p>
+<p>获取网页被卷去的左：alert(document.body.scrollLeft);</p>
+<p>获取网页正文部分上：alert(window.screenTop);</p>
+<p>获取网页正文部分左：alert(window.screenLeft);</p>
+<p>获取屏幕分辨率的宽：alert(window.screen.width);</p>
+<p>获取屏幕分辨率的高：alert(window.screen.height);</p>
+<p>获取屏幕可用工作区宽度：alert(window.screen.availWidth);</p>
+<p>获取屏幕可用工作区高度：alert(window.screen.availHeight);</p>

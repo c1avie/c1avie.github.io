@@ -1,0 +1,87 @@
+---
+layout: post
+title: js&&time
+date: 2013-06-13 14:22:28.000000000 +08:00
+categories:
+- FE
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  duoshuo_thread_id: '1203060334345060382'
+  _edit_last: '1'
+author:
+  login: C1avie
+  email: 429465251@qq.com
+  display_name: C1avie
+  first_name: ''
+  last_name: ''
+---
+<p>线上测试地址：http://uctest.ucweb.com:10070/c1avie/test/time.html<br />
+具体实现效果：今天是6月13日 星期四 第16周</p>
+<p>定义一些变量，具体就不多说了。<br />
+            var d = new Date(),<br />
+		year = d.getFullYear(),<br />
+	 	month = d.getMonth(),<br />
+	 	week = d.getDay(),<br />
+	 	day = d.getDate(),<br />
+		monthDay = new Array(31,28,31,30,31,30,31,31,30,31,30,31),<br />
+		weekDay = "",<br />
+		isLeapYear = false;  //是否为闰年</p>
+<p>将数字转换为汉字，因此用了一个switch的转换<br />
+	switch(week) {<br />
+		case 0:<br />
+			weekDay = "日";<br />
+			break;<br />
+		case 1:<br />
+			weekDay = "一";<br />
+			break;<br />
+		case 2:<br />
+			weekDay = "二";<br />
+			break;<br />
+		case 3:<br />
+			weekDay = "三";<br />
+			break;<br />
+		case 4:<br />
+			weekDay = "四";<br />
+			break;<br />
+		case 5:<br />
+			weekDay = "五";<br />
+			break;<br />
+		case 6:<br />
+			weekDay = "六";<br />
+			break;<br />
+	}</p>
+<p>判断是否为闰年，大家应该都不陌生吧<br />
+	if( ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0) ) {<br />
+		isLeapYear = true;<br />
+	}</p>
+<p>循环计算天数<br />
+	function getCurrentDay(theMonth,theDay) {<br />
+		var currentDay = 0;<br />
+		for(var i = 0;i < monthDay.length;i++) {<br />
+			if(i < theMonth) {<br />
+				if(isLeapYear && i == 1) {<br />
+					currentDay = currentDay + 29;<br />
+				}<br />
+				else {<br />
+					currentDay = currentDay + monthDay[i];<br />
+				}<br />
+			}<br />
+			if(i == theMonth) {<br />
+				currentDay = currentDay + theDay;<br />
+			}<br />
+		}<br />
+		return currentDay;<br />
+	}</p>
+<p>我们学校忘记是什么时候开学的了，大致记得是2.24开始的第一周，因此这里是把3.24之前的天数减去<br />
+var nowDay = getCurrentDay(month,day),<br />
+	    initialDay = getCurrentDay(1,23),<br />
+	    weekYear = parseInt((nowDay - initialDay) / 7);<br />
+	if(week != 6) {<br />
+		weekYear = weekYear + 1;<br />
+	}<br />
+	var today = document.getElementById("today");<br />
+	today.innerHTML = "今天是" + (month + 1) + "月" + day + "日" + "<span style="margin-left: 15px;">" + "星期" + weekDay + "</span>" + "<span style="margin-left: 15px;">" + "第" + weekYear + "周" + "</span>";<br />
+其实我是想算农历的，但是不知道阳历与农历的转换算法，只好作罢。</p>
