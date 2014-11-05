@@ -2,22 +2,22 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Latest Posts &#8211; C1AVIE</title>
-<meta name="description" content="The personal blog of Hossain Mohd. Faysal, a doctoral candidate in Electrical Engineering at University of Pennsylvania.">
-<meta name="keywords" content="Hossain, Mohd, Faysal, electrical, engineering, blog, university, pennsylvania, doha, Qatar">
+<title>posts &#8211; C1AVIE</title>
+<meta name="description" content="Baidu FE">
+<meta name="keywords" content="FE, blog, Baidu">
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="/images/omikron.png">
-<meta name="twitter:title" content="Latest Posts">
-<meta name="twitter:description" content="The personal blog of Hossain Mohd. Faysal, a doctoral candidate in Electrical Engineering at University of Pennsylvania.">
+<meta name="twitter:title" content="posts">
+<meta name="twitter:description" content="Baidu FE">
 <meta name="twitter:creator" content="@c1avie">
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Latest Posts">
-<meta property="og:description" content="The personal blog of Hossain Mohd. Faysal, a doctoral candidate in Electrical Engineering at University of Pennsylvania.">
+<meta property="og:title" content="posts">
+<meta property="og:description" content="Baidu FE">
 <meta property="og:url" content="/index.html">
 <meta property="og:site_name" content="C1AVIE">
 <meta property="og:image" content="/images/default_bg1.jpg">
@@ -173,25 +173,8 @@
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                    <p>JavaScript有一个prototype的属性,调用JavaScript构造器创建一个对象后，新对象就会具有构造器的所有属性。通过这种方式，可以创建多个Car对象，并访问相同的原型。
+	                	<p>JavaScript有一个prototype的属性,调用JavaScript构造器创建一个对象后，新对象就会具有构造器的所有属性。通过这种方式，可以创建多个Car对象，并访问相同的原型。
 
-function Person(name, sex, age) {
-	this.name = name;
-	this.sex = sex;
-	this.age = age;
-}
-
-Person.prototype.toString = function() {
-	return this.name + &quot; is a &quot; + this.sex + &quot;,age is &quot; + this.age;
-}
-
-var c1avie = new Person(&quot;c1avie&quot;,&quot;male&quot;,1991);
-var niuzan = new Person(&quot;niuzan&quot;,&quot;male&quot;,1992);
-
-console.log(c1avie.toString());
-console.log(niuzan.toString());
-
-现在toString()的单一实例就能在所有Person对象之间共享
 &hellip;</p>
 	                    <div class="text-center">
 	                    
@@ -232,7 +215,12 @@ console.log(niuzan.toString());
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                    <p>最近做了一个本地客户端调起方案的调研，收获不少，总结一下,这里先不收调起协议之类的事。 先说下之前的方案： Iphone：直接吊起以及暴力弹框。如果没有调起客户端，则出现弹框。如果成功调起客户端，则返回到页面中时触发pageshow事件，消除弹框。不过IOS uc浏览器不支持这个事件，因此返回到页面中时弹框会出现。 Android及其它：首先检测是否安装了客户端。如果安装了的话，则调起本地客户端。如果没有安装，则提供下载。由于检测是否安装了客户端的成功率不高，即可能用户已经安装了客户端，但是没有检测出来。所以需要改进。 if (util.isIPhone()) { me.appbutton.html('点击打开手机地图，省90%流量'); util.bindHrefStat(me.appbutton, function() { $(document.body).append(""); window.a = setTimeout(function() { util.DownBox.showTb(); }, 1500); return false; }); } else { me.appbutton.attr('data', util.getClientUrl('download')); util.isInstalledClient(function(openurl) { me.appbutton.html('点击打开手机地图，省90%流量').attr('data', util.getNativeUrl()); me.appbutton.addClass("open"); util.bindHrefStat(me.appbutton, function() { pbstat.addStat(COM_PB_STAT.TOP_BANNER, "click", { is_install_clientapp: true, os: me.os }); }); }, function(downloadurl) { me.appbutton.html($info).attr('data', downloadurl); util.bindHrefStat(me.appbutton, function() { pbstat.addStat(COM_PB_STAT.TOP_BANNER, "click", { is_install_clientapp: false, os: me.os }); }); }, me.appbutton.attr('uid')); } &nbsp; 中间的策略： IOS与Android都是直接调起以及暴力弹框，为支持android的uc和默认浏览器，新绑定了blur事件和visibilitychange事件。成功解决了android上uc和默认浏览器的显示问题。但是遗憾的是IOS uc浏览器对这几个事件都不支持。只能再想解决方案。 参考资料： 用户离开页面和回到页面事件（标签切换） http://blog.csdn.net/do_it__/article/details/6983239 html5 page visibility http://jackyrong.iteye.com/blog/1300764 &nbsp; 现在的解决方案： 看了贴吧那边的webapp，在IOS下调起方案很好，不过他们在android下兼容性好像不行，都是直接下载的,无论安装客户端与否。于是找永霞联系了下贴吧那边的技术人员，并参阅了一些资料，找到了解决方案。 Iphone下采用一个计时策略，如果调起了客户端，则时间会大于2000毫秒，不提供下载。如果没有调起，时间会小于2000毫秒，提供下载链接. 测试情况：如果安装了对应的客户端，则浏览器均能打开应用；如果未安装，safari会首先弹出一个错误提醒，然后调用widow.location的代码，uc直接调用window.location这行代码。 Android则是直接调起与暴力弹框，调起客户端回到页面中时通过触发事件消除弹框。 me.appbutton.html('点击打开手机地图，省90%流量'); if(util.isIPhone()) { util.bindHrefStat(me.appbutton, function() { $(document.body).append(""); var clickedAt = +new Date; setTimeout(function(){ !window.document.webkitHidden && setTimeout(function(){ if (+new...&hellip;</p>
+	                	<p>最近做了一个本地客户端调起方案的调研，收获不少，总结一下,这里先不收调起协议之类的事。
+先说下之前的方案： 
+Iphone：直接吊起以及暴力弹框。如果没有调起客户端，则出现弹框。如果成功调起客户端，则返回到页面中时触发pageshow事件，消除弹框。不过IOS uc浏览器不支持这个事件，因此返回到页面中时弹框会出现。
+Android及其它：首先检测是否安装了客户端。如果安装了的话，则调起本地客户端。如果没有安装，则提供下载。由于检测是否安装了客户端的成功率不高，即可能用户已经安装了客户端，但是没有检测出来。所以需要改进。 
+
+&hellip;</p>
 	                    <div class="text-center">
 	                    
 		                <a href="/fe/web-to-native" data-toggle="tooltip" title="Read more about 本地客户端调起解决方案" class="more-link btn btn-danger btn-large">
@@ -271,20 +259,11 @@ console.log(niuzan.toString());
 	                </header>
 	                <div class="post-body bordered-bottom">
 	                
-	                <p class = "lead">好久没写东西了，昨天跟我们组大二、大一的学弟学妹做了个实习分享。才发现自己应该把一些东西记下来，不管是总结也好，缅怀也好。
-我是3.26入职的，大概实习了一个月，因为考试就回来了，准备明天再过去。我们组主要是做百度地图webapp的，附上网址：http://map.baidu.com/mobile/webapp/index/index
+	                
+	                	<p>好久没写东西了，昨天跟我们组大二、大一的学弟学妹做了个实习分享。才发现自己应该把一些东西记下来，不管是总结也好，缅怀也好。
+我是3.26入职的，大概实习了一个月，因为考试就回来了，准备明天再过去。我们组主要是做百度地图webapp的，附上网址：http://map.baidu.com/mobile/webapp/index/index 
 我们组的传统是新人前两周学习webapp的框架代码superman，它是基于fis的，想了解fis的同学可以参考：http://fis.baidu.com/
-学习的过程中深入理解了很多新的概念，比如单页系统、BigPipe、quicking等，收获还是挺多的。
-后面跟着我们组的才女加美女旖涵一起完成了扫雷4号项目，北大的果然名不虚传，坐地铁都抱本书看，膜拜ing。
-附上学习两周后的代码串讲PPT：牛赞-webapp代码学习串讲
-附上在北京的一些生活照，哈哈
-[caption id="attachment_281" align="alignnone" width="168"] 在后海[/caption]
-[caption id="attachment_282" align="alignnone" width="168"] 清华大学[/caption]
-[caption id="attachment_288" align="alignnone" width="168"] 北京的日落[/caption]
-[caption id="attachment_291" align="alignnone" width="168"] 陈功学长的猫猫[/caption]
-[caption id="attachment_287" align="alignnone" width="168"] 颐和园[/caption]
-[caption id="attachment_284" align="alignnone" width="168"] 星哥大厨啊[/caption]
-
+学习的过程中深入理解了很多新的概念，比如单页系统、BigPipe、quicking等，收获还是挺多的。 
 
 &hellip;</p>
 	                    <div class="text-center">
@@ -326,7 +305,7 @@ console.log(niuzan.toString());
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                    <p>拖拽的基本原理： 当mousedown时记下鼠标点击位置离拖拽容器左边沿的距离和上边沿的距离，即tmpX,tmpY；mousemove时通过定位拖拽容器的style.left/style.top，使拖拽容器进行移动，定位到哪里则由刚刚的tmpX/tmpY和当前鼠标所在位置计算得出；mouseup时，结束移动。 设置拖拽容器可拖拽的范围，若未设置，则默认为当前窗口可视范围。Note：在设置范围的时候使用Math.max/min来处理，而不是用If语句判断，用后者的话会导致快速拖拽时未达到容许范围边沿即停止的状况。 Html代码： drag me Css代码： #box{position:absolute; left:100px; top:100px; padding:5px; background:#f0f3f9; font-size:12px; -moz-box-shadow:2px 2px 4px #666666; -webkit-box-shadow:2px 2px 4px #666666;width: 100px;height: 100px;} Javascript代码： var params = { left: 100, top: 100, currentX: 0, currentY: 0, flag: false }; var obox = document.getElementById("box"); Dragme(obox); //拖拽的实现 function Dragme(boxdrag){ //o是移动对象 boxdrag.onmousedown = function(event){ params.flag = true; var e = event; params.currentX = e.clientX; params.currentY = e.clientY; }; document.onmouseup = function(){ params.flag = false; params.left = boxdrag.style.left; params.top = boxdrag.style.top; }; document.onmousemove = function(event){ var e = event ? event: window.event; if(params.flag){ var nowX = e.clientX, nowY = e.clientY; var disX = nowX...&hellip;</p>
+	                	<p>拖拽的基本原理： 当mousedown时记下鼠标点击位置离拖拽容器左边沿的距离和上边沿的距离，即tmpX,tmpY；mousemove时通过定位拖拽容器的style.left/style.top，使拖拽容器进行移动，定位到哪里则由刚刚的tmpX/tmpY和当前鼠标所在位置计算得出；mouseup时，结束移动。 设置拖拽容器可拖拽的范围，若未设置，则默认为当前窗口可视范围。Note：在设置范围的时候使用Math.max/min来处理，而不是用If语句判断，用后者的话会导致快速拖拽时未达到容许范围边沿即停止的状况。 Html代码： drag me Css代码： #box{position:absolute; left:100px; top:100px; padding:5px; background:#f0f3f9; font-size:12px; -moz-box-shadow:2px 2px 4px #666666; -webkit-box-shadow:2px 2px 4px #666666;width: 100px;height: 100px;} Javascript代码： var params = { left: 100, top: 100, currentX: 0, currentY: 0, flag: false }; var obox = document.getElementById("box"); Dragme(obox); //拖拽的实现 function Dragme(boxdrag){ //o是移动对象 boxdrag.onmousedown = function(event){ params.flag = true; var e = event; params.currentX = e.clientX; params.currentY = e.clientY; }; document.onmouseup = function(){ params.flag = false; params.left = boxdrag.style.left; params.top = boxdrag.style.top; }; document.onmousemove = function(event){ var e = event ? event: window.event; if(params.flag){ var nowX = e.clientX, nowY = e.clientY; var disX = nowX...&hellip;</p>
 	                    <div class="text-center">
 	                    
 		                <a href="/fe/drag" data-toggle="tooltip" title="Read more about 拖拽" class="more-link btn btn-danger btn-large">
@@ -366,7 +345,7 @@ console.log(niuzan.toString());
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                    <p>html代码： 关闭 挑战一下 css代码： /*弹出层部分*/ #box {display: none;position: absolute;width: 440px;height: 284px;background: url(../images/layer.jpg) no-repeat;z-index: 200; } #closeBtn {position: absolute;right: 10px;top: 10px;cursor: pointer;color: #000 ; } #greybackground {background: #000;display: block;z-index: 100;width: 100%;position: absolute;top: 0;left: 0; } #box p {position: absolute;left: 180px;bottom: 40px;} #box p a {color: #fff;font-size: 16px;text-decoration: underline;} #box p a:hover {text-decoration: none;} js代码： $(function(){ 　　var screenwidth,screenheight,mytop,getPosLeft,getPosTop; 　　screenwidth = $(window).width(); 　　screenheight = $(window).height(); 　　mytop = $(document).scrollTop(); 　　getPosLeft = screenwidth/2 - 220; 　　getPosTop = screenheight/2 - 142; 　　$("#box").css({"left":getPosLeft,"top":getPosTop}); $(window).resize(function(){ 　　screenwidth = $(window).width(); 　　screenheight = $(window).height(); 　　mytop = $(document).scrollTop(); 　　getPosLeft = screenwidth/2 - 220; 　　getPosTop = screenheight/2 - 142; 　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop}); }); 　　$(window).scroll(function(){ 　　screenwidth...&hellip;</p>
+	                	<p>html代码： 关闭 挑战一下 css代码： /*弹出层部分*/ #box {display: none;position: absolute;width: 440px;height: 284px;background: url(../images/layer.jpg) no-repeat;z-index: 200; } #closeBtn {position: absolute;right: 10px;top: 10px;cursor: pointer;color: #000 ; } #greybackground {background: #000;display: block;z-index: 100;width: 100%;position: absolute;top: 0;left: 0; } #box p {position: absolute;left: 180px;bottom: 40px;} #box p a {color: #fff;font-size: 16px;text-decoration: underline;} #box p a:hover {text-decoration: none;} js代码： $(function(){ 　　var screenwidth,screenheight,mytop,getPosLeft,getPosTop; 　　screenwidth = $(window).width(); 　　screenheight = $(window).height(); 　　mytop = $(document).scrollTop(); 　　getPosLeft = screenwidth/2 - 220; 　　getPosTop = screenheight/2 - 142; 　　$("#box").css({"left":getPosLeft,"top":getPosTop}); $(window).resize(function(){ 　　screenwidth = $(window).width(); 　　screenheight = $(window).height(); 　　mytop = $(document).scrollTop(); 　　getPosLeft = screenwidth/2 - 220; 　　getPosTop = screenheight/2 - 142; 　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop}); }); 　　$(window).scroll(function(){ 　　screenwidth...&hellip;</p>
 	                    <div class="text-center">
 	                    
 		                <a href="/fe/cover" data-toggle="tooltip" title="Read more about 遮罩层" class="more-link btn btn-danger btn-large">
@@ -406,7 +385,7 @@ console.log(niuzan.toString());
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                    <p>1.下面的代码输出结构分别是什么
+	                	<p>1.下面的代码输出结构分别是什么
 
 function Person() {
 this.myName = 'Tom';
@@ -460,6 +439,8 @@ a)页面自适应屏幕宽度
 b)侧边栏固定宽度300px,其他元素均自适应宽度
 c）页头、导航栏、页脚固定宽度40px，正文部分按内容自动撑高
 具体可参见https://github.com/c1avie/UC2014
+
+
 &hellip;</p>
 	                    <div class="text-center">
 	                    

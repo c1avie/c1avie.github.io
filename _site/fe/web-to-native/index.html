@@ -156,87 +156,96 @@
                     </header>
                     <div class="post-body bordered-bottom" itemprop="description">
                         
-                        <p>最近做了一个本地客户端调起方案的调研，收获不少，总结一下,这里先不收调起协议之类的事。</p>
-<p>先说下之前的方案：</p>
-<p>Iphone：直接吊起以及暴力弹框。如果没有调起客户端，则出现弹框。如果成功调起客户端，则返回到页面中时触发pageshow事件，消除弹框。不过IOS uc浏览器不支持这个事件，因此返回到页面中时弹框会出现。</p>
-<p>Android及其它：首先检测是否安装了客户端。如果安装了的话，则调起本地客户端。如果没有安装，则提供下载。由于检测是否安装了客户端的成功率不高，即可能用户已经安装了客户端，但是没有检测出来。所以需要改进。</p>
-<p><code lang="javascript"><br />
-if (util.isIPhone()) {<br />
-me.appbutton.html('点击打开手机地图，省90%流量');<br />
-util.bindHrefStat(me.appbutton, function() {<br />
-$(document.body).append("<iframe id="callapp" style="border: 0; display: none;" src="baidumap://map/" width="0" height="0">");<br />
-window.a = setTimeout(function() {<br />
-util.DownBox.showTb();<br />
-}, 1500);<br />
-return false;<br />
-});<br />
-} else {<br />
-me.appbutton.attr('data', util.getClientUrl('download'));<br />
-util.isInstalledClient(function(openurl) {<br />
-me.appbutton.html('点击打开手机地图，省90%流量').attr('data', util.getNativeUrl());<br />
-me.appbutton.addClass("open");<br />
-util.bindHrefStat(me.appbutton, function() {<br />
-pbstat.addStat(COM_PB_STAT.TOP_BANNER, "click", {<br />
-is_install_clientapp: true,<br />
-os: me.os<br />
-});<br />
-});<br />
-}, function(downloadurl) {<br />
-me.appbutton.html($info).attr('data', downloadurl);<br />
-util.bindHrefStat(me.appbutton, function() {<br />
-pbstat.addStat(COM_PB_STAT.TOP_BANNER, "click", {<br />
-is_install_clientapp: false,<br />
-os: me.os<br />
-});<br />
-});<br />
-}, me.appbutton.attr('uid'));</p>
-<p>}<br />
-</iframe></code></p>
-<p>&nbsp;<br />
-中间的策略：</p>
+                        <p>最近做了一个本地客户端调起方案的调研，收获不少，总结一下,这里先不收调起协议之类的事。<br />
+先说下之前的方案： <br />
+Iphone：直接吊起以及暴力弹框。如果没有调起客户端，则出现弹框。如果成功调起客户端，则返回到页面中时触发pageshow事件，消除弹框。不过IOS uc浏览器不支持这个事件，因此返回到页面中时弹框会出现。<br />
+Android及其它：首先检测是否安装了客户端。如果安装了的话，则调起本地客户端。如果没有安装，则提供下载。由于检测是否安装了客户端的成功率不高，即可能用户已经安装了客户端，但是没有检测出来。所以需要改进。 <br /></p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">util</span><span class="p">.</span><span class="nx">isIPhone</span><span class="p">())</span> <span class="p">{</span>
+	<span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;点击打开手机地图，省90%流量&#39;</span><span class="p">);</span>
+	<span class="nx">util</span><span class="p">.</span><span class="nx">bindHrefStat</span><span class="p">(</span><span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;iframe id=&quot;</span>
+			<span class="nx">callapp</span> <span class="s2">&quot; style=&quot;</span>
+			<span class="nx">border</span><span class="o">:</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">display</span><span class="o">:</span> <span class="nx">none</span><span class="p">;</span>
+			<span class="s2">&quot; src=&quot;</span>
+			<span class="nx">baidumap</span><span class="o">:</span> <span class="c1">//map/&quot; width=&quot;0&quot; height=&quot;0&quot;&gt;&quot;);</span>
+			<span class="nb">window</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+				<span class="nx">util</span><span class="p">.</span><span class="nx">DownBox</span><span class="p">.</span><span class="nx">showTb</span><span class="p">();</span>
+			<span class="p">},</span> <span class="mi">1500</span><span class="p">);</span>
+			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+		<span class="p">});</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">util</span><span class="p">.</span><span class="nx">getClientUrl</span><span class="p">(</span><span class="s1">&#39;download&#39;</span><span class="p">));</span>
+	<span class="nx">util</span><span class="p">.</span><span class="nx">isInstalledClient</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">openurl</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;点击打开手机地图，省90%流量&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">util</span><span class="p">.</span><span class="nx">getNativeUrl</span><span class="p">());</span>
+		<span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;open&quot;</span><span class="p">);</span>
+		<span class="nx">util</span><span class="p">.</span><span class="nx">bindHrefStat</span><span class="p">(</span><span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">pbstat</span><span class="p">.</span><span class="nx">addStat</span><span class="p">(</span><span class="nx">COM_PB_STAT</span><span class="p">.</span><span class="nx">TOP_BANNER</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="p">{</span>
+				<span class="nx">is_install_clientapp</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+				<span class="nx">os</span><span class="o">:</span> <span class="nx">me</span><span class="p">.</span><span class="nx">os</span>
+			<span class="p">});</span>
+		<span class="p">});</span>
+	<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">downloadurl</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$info</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">downloadurl</span><span class="p">);</span>
+		<span class="nx">util</span><span class="p">.</span><span class="nx">bindHrefStat</span><span class="p">(</span><span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">pbstat</span><span class="p">.</span><span class="nx">addStat</span><span class="p">(</span><span class="nx">COM_PB_STAT</span><span class="p">.</span><span class="nx">TOP_BANNER</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="p">{</span>
+				<span class="nx">is_install_clientapp</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+				<span class="nx">os</span><span class="o">:</span> <span class="nx">me</span><span class="p">.</span><span class="nx">os</span>
+			<span class="p">});</span>
+		<span class="p">});</span>
+	<span class="p">},</span> <span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;uid&#39;</span><span class="p">));</span>
+<span class="p">}</span></code></pre></div>
+
+<p>中间的策略：</p>
+
 <p>IOS与Android都是直接调起以及暴力弹框，为支持android的uc和默认浏览器，新绑定了blur事件和visibilitychange事件。成功解决了android上uc和默认浏览器的显示问题。但是遗憾的是IOS uc浏览器对这几个事件都不支持。只能再想解决方案。</p>
-<p>参考资料：</p>
-<p>用户离开页面和回到页面事件（标签切换）</p>
-<p><a href="http://blog.csdn.net/do_it__/article/details/6983239">http://blog.csdn.net/do_it__/article/details/6983239</a></p>
-<p>html5 page visibility</p>
-<p><a href="http://jackyrong.iteye.com/blog/1300764">http://jackyrong.iteye.com/blog/1300764</a></p>
-<p>&nbsp;</p>
+
+<p>参考资料：
+用户离开页面和回到页面事件（标签切换）
+<a href="http://blog.csdn.net/do_it__/article/details/6983239">http://blog.csdn.net/do_it__/article/details/6983239</a></p>
+
+<p>html5 page visibility
+<a href="http://jackyrong.iteye.com/blog/1300764">http://jackyrong.iteye.com/blog/1300764</a></p>
+
 <p>现在的解决方案：</p>
-<p>看了贴吧那边的webapp，在IOS下调起方案很好，不过他们在android下兼容性好像不行，都是直接下载的,无论安装客户端与否。于是找永霞联系了下贴吧那边的技术人员，并参阅了一些资料，找到了解决方案。</p>
-<p>Iphone下采用一个计时策略，如果调起了客户端，则时间会大于2000毫秒，不提供下载。如果没有调起，时间会小于2000毫秒，提供下载链接.</p>
-<p>测试情况：如果安装了对应的客户端，则浏览器均能打开应用；如果未安装，safari会首先弹出一个错误提醒，然后调用widow.location的代码，uc直接调用window.location这行代码。</p>
-<p>Android则是直接调起与暴力弹框，调起客户端回到页面中时通过触发事件消除弹框。</p>
-<p><code lang="javascript"><br />
-me.appbutton.html('点击打开手机地图，省90%流量');<br />
-if(util.isIPhone()) {<br />
-util.bindHrefStat(me.appbutton, function() {<br />
-$(document.body).append("<iframe src="baidumap://map/" id="callapp" width="0" height="0" style="border: 0;display: none;">");<br />
-var clickedAt = +new Date;<br />
-setTimeout(function(){<br />
-!window.document.webkitHidden && setTimeout(function(){<br />
-if (+new Date - clickedAt < 2000){<br />
-window.location = 'http://itunes.apple.com/cn/app/id452186370?ls=1&mt=8';<br />
-}<br />
-}, 500);<br />
-}, 500)<br />
-return false;<br />
-});<br />
-}<br />
-else {<br />
-util.bindHrefStat(me.appbutton, function() {<br />
-$(document.body).append("<iframe src="baidumap://map/" id="callapp" width="0" height="0" style="border: 0;display: none;">");<br />
-window.a = setTimeout(function() {<br />
-util.DownBox.showTb();<br />
-}, 1500);</p>
-<p>return false;<br />
-});<br />
-}<br />
-</iframe></iframe></code></p>
-<p>参考资料：<br />
-<a href="http://liushuibird.blog.163.com/blog/static/1241915612013810113326699/">http://liushuibird.blog.163.com/blog/static/1241915612013810113326699/</a></p>
-<p>项目Demo(限内网):<br />
+
+<p>看了贴吧那边的webapp，在IOS下调起方案很好，不过他们在android下兼容性好像不行，都是直接下载的,无论安装客户端与否。于是找永霞联系了下贴吧那边的技术人员，并参阅了一些资料，找到了解决方案。
+Iphone下采用一个计时策略，如果调起了客户端，则时间会大于2000毫秒，不提供下载。如果没有调起，时间会小于2000毫秒，提供下载链接.</p>
+
+<p>测试情况：如果安装了对应的客户端，则浏览器均能打开应用；如果未安装，safari会首先弹出一个错误提醒，然后调用widow.location的代码，uc直接调用window.location这行代码。
+Android则是直接调起与暴力弹框，调起客户端回到页面中时通过触发事件消除弹框。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;点击打开手机地图，省90%流量&#39;</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">util</span><span class="p">.</span><span class="nx">isIPhone</span><span class="p">())</span> <span class="p">{</span>
+	<span class="nx">util</span><span class="p">.</span><span class="nx">bindHrefStat</span><span class="p">(</span><span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;iframe src=&quot;</span><span class="nx">baidumap</span><span class="o">:</span><span class="c1">//map/&quot; id=&quot;callapp&quot; width=&quot;0&quot; height=&quot;0&quot; style=&quot;border: 0;display: none;&quot;&gt;&quot;);</span>
+		<span class="kd">var</span> <span class="nx">clickedAt</span> <span class="o">=</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">;</span>
+		<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+			<span class="o">!</span><span class="nb">window</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">webkitHidden</span> <span class="o">&amp;&amp;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+				<span class="k">if</span> <span class="p">(</span><span class="o">+</span><span class="k">new</span> <span class="nb">Date</span> <span class="o">-</span> <span class="nx">clickedAt</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">){</span>
+					<span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s1">&#39;http://itunes.apple.com/cn/app/id452186370?ls=1&amp;mt=8&#39;</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+		<span class="p">},</span> <span class="mi">500</span><span class="p">)</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="p">});</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+	<span class="nx">util</span><span class="p">.</span><span class="nx">bindHrefStat</span><span class="p">(</span><span class="nx">me</span><span class="p">.</span><span class="nx">appbutton</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;iframe src=&quot;</span><span class="nx">baidumap</span><span class="o">:</span><span class="c1">//map/&quot; id=&quot;callapp&quot; width=&quot;0&quot; height=&quot;0&quot; style=&quot;border: 0;display: none;&quot;&gt;&quot;);</span>
+		<span class="nb">window</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">util</span><span class="p">.</span><span class="nx">DownBox</span><span class="p">.</span><span class="nx">showTb</span><span class="p">();</span>
+		<span class="p">},</span> <span class="mi">1500</span><span class="p">);</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="p">});</span>
+<span class="p">}</span></code></pre></div>
+
+<p>参考资料：</p>
+
+<p><a href="http://liushuibird.blog.163.com/blog/static/1241915612013810113326699/">http://liushuibird.blog.163.com/blog/static/1241915612013810113326699/</a></p>
+
+<p>项目Demo(限内网):
 <a href="http://cp01-rdqa-dev010.cp01.baidu.com:8088/mobile/webapp/index/index">http://cp01-rdqa-dev010.cp01.baidu.com:8088/mobile/webapp/index/index</a></p>
-<p>&nbsp;</p>
 
                         <br>
                     
