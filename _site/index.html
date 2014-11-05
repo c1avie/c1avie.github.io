@@ -305,7 +305,11 @@ Android及其它：首先检测是否安装了客户端。如果安装了的话�
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                	<p>拖拽的基本原理： 当mousedown时记下鼠标点击位置离拖拽容器左边沿的距离和上边沿的距离，即tmpX,tmpY；mousemove时通过定位拖拽容器的style.left/style.top，使拖拽容器进行移动，定位到哪里则由刚刚的tmpX/tmpY和当前鼠标所在位置计算得出；mouseup时，结束移动。 设置拖拽容器可拖拽的范围，若未设置，则默认为当前窗口可视范围。Note：在设置范围的时候使用Math.max/min来处理，而不是用If语句判断，用后者的话会导致快速拖拽时未达到容许范围边沿即停止的状况。 Html代码： drag me Css代码： #box{position:absolute; left:100px; top:100px; padding:5px; background:#f0f3f9; font-size:12px; -moz-box-shadow:2px 2px 4px #666666; -webkit-box-shadow:2px 2px 4px #666666;width: 100px;height: 100px;} Javascript代码： var params = { left: 100, top: 100, currentX: 0, currentY: 0, flag: false }; var obox = document.getElementById("box"); Dragme(obox); //拖拽的实现 function Dragme(boxdrag){ //o是移动对象 boxdrag.onmousedown = function(event){ params.flag = true; var e = event; params.currentX = e.clientX; params.currentY = e.clientY; }; document.onmouseup = function(){ params.flag = false; params.left = boxdrag.style.left; params.top = boxdrag.style.top; }; document.onmousemove = function(event){ var e = event ? event: window.event; if(params.flag){ var nowX = e.clientX, nowY = e.clientY; var disX = nowX...&hellip;</p>
+	                	<p>拖拽的基本原理：
+当mousedown时记下鼠标点击位置离拖拽容器左边沿的距离和上边沿的距离，即tmpX,tmpY；mousemove时通过定位拖拽容器的style.left/style.top，使拖拽容器进行移动，定位到哪里则由刚刚的tmpX/tmpY和当前鼠标所在位置计算得出；mouseup时，结束移动。
+设置拖拽容器可拖拽的范围，若未设置，则默认为当前窗口可视范围。Note：在设置范围的时候使用Math.max/min来处理，而不是用If语句判断，用后者的话会导致快速拖拽时未达到容许范围边沿即停止的状况。
+
+&hellip;</p>
 	                    <div class="text-center">
 	                    
 		                <a href="/fe/drag" data-toggle="tooltip" title="Read more about 拖拽" class="more-link btn btn-danger btn-large">
@@ -345,7 +349,9 @@ Android及其它：首先检测是否安装了客户端。如果安装了的话�
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                	<p>html代码： 关闭 挑战一下 css代码： /*弹出层部分*/ #box {display: none;position: absolute;width: 440px;height: 284px;background: url(../images/layer.jpg) no-repeat;z-index: 200; } #closeBtn {position: absolute;right: 10px;top: 10px;cursor: pointer;color: #000 ; } #greybackground {background: #000;display: block;z-index: 100;width: 100%;position: absolute;top: 0;left: 0; } #box p {position: absolute;left: 180px;bottom: 40px;} #box p a {color: #fff;font-size: 16px;text-decoration: underline;} #box p a:hover {text-decoration: none;} js代码： $(function(){ 　　var screenwidth,screenheight,mytop,getPosLeft,getPosTop; 　　screenwidth = $(window).width(); 　　screenheight = $(window).height(); 　　mytop = $(document).scrollTop(); 　　getPosLeft = screenwidth/2 - 220; 　　getPosTop = screenheight/2 - 142; 　　$("#box").css({"left":getPosLeft,"top":getPosTop}); $(window).resize(function(){ 　　screenwidth = $(window).width(); 　　screenheight = $(window).height(); 　　mytop = $(document).scrollTop(); 　　getPosLeft = screenwidth/2 - 220; 　　getPosTop = screenheight/2 - 142; 　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop}); }); 　　$(window).scroll(function(){ 　　screenwidth...&hellip;</p>
+	                	<p>遮罩层这种需求在项目中经常会遇到，如欢迎页或者新功能介绍页等。下面就简单介绍下如何实现这种需求。
+
+&hellip;</p>
 	                    <div class="text-center">
 	                    
 		                <a href="/fe/cover" data-toggle="tooltip" title="Read more about 遮罩层" class="more-link btn btn-danger btn-large">
@@ -385,61 +391,7 @@ Android及其它：首先检测是否安装了客户端。如果安装了的话�
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                	<p>1.下面的代码输出结构分别是什么
-
-function Person() {
-this.myName = 'Tom';
-}
-Person.prototype.sayName = function() {
-var myName = 'Jerry';
-console.log(this.myName);
-}
-Person.prototype.sayHello = function() {
-setTimeout(this.sayName,100);
-}
-var p = new Person();
-p.sayName();
-p.sayHello();
-
-上面的代码输出结果为Tom和undefined 后面为undefined是因为没有正确调用方法，将setTimeout(this.sayName,100)改为setTimeout(this.sayName（）,100)就能正确返回Tom了
-2.以下是一段js代码，其中element是一个dom元素。请说出该函数是否存在问题，如果有，请指出问题所在，并提供解决方案。
-
-function foo(element) {
-var str = 'uc';
-element.onclick = function() {
-console.log(str + element.tagName);
-};
-}
-
-该函数为元素绑定了一个onclick事件，但是如果后面想继续为该元素绑定事件时，事件会被覆盖 解决方法是
-
-var header = document.getElementById("header");
-addEvent(header,'click',test);
-function addEvent(element,ev,func) {
-if(element.attachEvent) {
-element.attachEvent('on' + ev,function() {
-func();
-});
-}
-else {
-element.addEventListener(ev,function(event) {
-func();
-});
-}
-}
-function test() {
-alert("test");
-}
-
-3.请用js实现对象的深度克隆
-查了下资料，这里有篇资料讲的挺好的
-http://sentsin.com/web/21.html
-4.设计一个页面的布局
-a)页面自适应屏幕宽度
-b)侧边栏固定宽度300px,其他元素均自适应宽度
-c）页头、导航栏、页脚固定宽度40px，正文部分按内容自动撑高
-具体可参见https://github.com/c1avie/UC2014
-
+	                	<p>有学长参加了UC2014的校招笔试题，并带回来了一张试卷，我就试着自己做了下。
 
 &hellip;</p>
 	                    <div class="text-center">

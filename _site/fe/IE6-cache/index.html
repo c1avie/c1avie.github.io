@@ -157,17 +157,19 @@
                     <div class="post-body bordered-bottom" itemprop="description">
                         
                         <p>E6下的背景图片每次使用都会重新发送请求，这会很影响代码的效率，用Css或Js可以解决这个问题</p>
+
 <p>用CSS实现：</p>
-<p>html {filter:expression(document.execCommand("BackgroundImageCache", false, true));}</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">html</span> <span class="p">{</span><span class="n">filter</span><span class="o">:</span><span class="n">expression</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">execCommand</span><span class="p">(</span><span class="s2">&quot;BackgroundImageCache&quot;</span><span class="o">,</span> <span class="n">false</span><span class="o">,</span> <span class="n">true</span><span class="p">));}</span></code></pre></div>
+
 <p>用JS实现：</p>
-<p>&lt;script type="text/javascript"&gt;<br />
-// IE6 background image caching fix.<br />
-// Include this JavaScript a the top of your page.<br />
-try {<br />
-document.execCommand("BackgroundImageCache", false, true);<br />
-} catch(e) {}<br />
-&lt;/script&gt;</p>
-<p>&nbsp;</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// IE6 background image caching fix.</span>
+<span class="c1">// Include this JavaScript a the top of your page.</span>
+<span class="k">try</span> <span class="p">{</span>
+	<span class="nb">document</span><span class="p">.</span><span class="nx">execCommand</span><span class="p">(</span><span class="s2">&quot;BackgroundImageCache&quot;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{}</span></code></pre></div>
+
 
                         <br>
                     

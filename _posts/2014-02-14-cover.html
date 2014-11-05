@@ -18,65 +18,73 @@ author:
   first_name: ''
   last_name: ''
 ---
-<p>html代码：<br />
-<code lang="html"><br />
-<!-- 弹出层部分 --></p>
+
+遮罩层这种需求在项目中经常会遇到，如欢迎页或者新功能介绍页等。下面就简单介绍下如何实现这种需求。<br />
+
+html代码：
+{% highlight html %}
+<!-- 弹出层部分 -->
 <div id="box">
-    <span id="closeBtn" style="color:white">关闭</span>  </p>
-<p><a id="gameMerry" href="http://gamemake.org/html5_game/shengdan/">挑战一下</a></p>
+    <span id="closeBtn" style="color:white">关闭</span>  
+<a id="gameMerry" href="http://gamemake.org/html5_game/shengdan/">挑战一下</a>
 </div>
-<p></code></p>
-<p>css代码：<br />
-<code lang="css"><br />
-/*弹出层部分*/<br />
-#box {display: none;position: absolute;width: 440px;height: 284px;background: url(../images/layer.jpg) no-repeat;z-index: 200;<br />
-}<br />
-#closeBtn {position: absolute;right: 10px;top: 10px;cursor: pointer;color: #000	;<br />
-}<br />
-#greybackground {background: #000;display: block;z-index: 100;width: 100%;position: absolute;top: 0;left: 0;<br />
-}<br />
-#box p {position: absolute;left: 180px;bottom: 40px;}<br />
-#box p a {color: #fff;font-size: 16px;text-decoration: underline;}<br />
-#box p a:hover {text-decoration: none;}<br />
-</code></p>
-<p>js代码：<br />
-<code lang="js"><br />
-$(function(){<br />
-　　var screenwidth,screenheight,mytop,getPosLeft,getPosTop;<br />
-　　screenwidth = $(window).width();<br />
-　　screenheight = $(window).height();<br />
-　　mytop = $(document).scrollTop();<br />
-　　getPosLeft = screenwidth/2 - 220;<br />
-　　getPosTop = screenheight/2 - 142;<br />
-　　$("#box").css({"left":getPosLeft,"top":getPosTop});   </p>
-<p>    $(window).resize(function(){<br />
-    　　screenwidth = $(window).width();<br />
-    　　screenheight = $(window).height();<br />
-    　　mytop = $(document).scrollTop();<br />
-    　　getPosLeft = screenwidth/2 - 220;<br />
-    　　getPosTop = screenheight/2 - 142;<br />
-    　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop});<br />
-    });    </p>
-<p>  　　$(window).scroll(function(){<br />
-    　　screenwidth = $(window).width();<br />
-    　　screenheight = $(window).height();<br />
-    　　mytop = $(document).scrollTop();<br />
-    　　getPosLeft = screenwidth/2 - 220;<br />
-    　　getPosTop = screenheight/2 - 142;<br />
-    　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop});<br />
-  　　});    </p>
-<p>  　　<br />
-    　　$("#box").fadeIn("fast");<br />
+{% endhighlight %}
+
+css代码：
+
+{% highlight css %}
+/*弹出层部分*/
+#box {display: none;position: absolute;width: 440px;height: 284px;background: url(../images/layer.jpg) no-repeat;z-index: 200;
+}
+#closeBtn {position: absolute;right: 10px;top: 10px;cursor: pointer;color: #000	;
+}
+#greybackground {background: #000;display: block;z-index: 100;width: 100%;position: absolute;top: 0;left: 0;
+}
+#box p {position: absolute;left: 180px;bottom: 40px;}
+#box p a {color: #fff;font-size: 16px;text-decoration: underline;}
+#box p a:hover {text-decoration: none;}
+{% endhighlight %}
+
+js代码：
+
+{% highlight javascript %}
+$(function(){
+　　var screenwidth,screenheight,mytop,getPosLeft,getPosTop;
+　　screenwidth = $(window).width();
+　　screenheight = $(window).height();
+　　mytop = $(document).scrollTop();
+　　getPosLeft = screenwidth/2 - 220;
+　　getPosTop = screenheight/2 - 142;
+　　$("#box").css({"left":getPosLeft,"top":getPosTop});   
+    $(window).resize(function(){
+    　　screenwidth = $(window).width();
+    　　screenheight = $(window).height();
+    　　mytop = $(document).scrollTop();
+    　　getPosLeft = screenwidth/2 - 220;
+    　　getPosTop = screenheight/2 - 142;
+    　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop});
+    });    
+  　　$(window).scroll(function(){
+    　　screenwidth = $(window).width();
+    　　screenheight = $(window).height();
+    　　mytop = $(document).scrollTop();
+    　　getPosLeft = screenwidth/2 - 220;
+    　　getPosTop = screenheight/2 - 142;
+    　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop});
+  　　});    
+  　　
+    　　$("#box").fadeIn("fast");
     　　$("body").append("
 <div id="greybackground"></div>
-<p>");<br />
-    　　var documentheight = $(document).height();<br />
-    　　$("#greybackground").css({"opacity":"0.5","height":documentheight});        </p>
-<p>  　　$("#closeBtn").click(function() {<br />
-    　　$("#box").hide();<br />
-    　　$("#greybackground").remove();<br />
-    　　return false;<br />
-  　　});<br />
-});<br />
-</code></p>
-<p>项目案例：http://newindex.stuzone.com/stuzone_page/</p>
+");
+    　　var documentheight = $(document).height();
+    　　$("#greybackground").css({"opacity":"0.5","height":documentheight});        
+  　　$("#closeBtn").click(function() {
+    　　$("#box").hide();
+    　　$("#greybackground").remove();
+    　　return false;
+  　　});
+});
+{% endhighlight %}
+
+项目案例：<a href="http://newindex.stuzone.com/stuzone_page/">http://newindex.stuzone.com/stuzone_page/</a>

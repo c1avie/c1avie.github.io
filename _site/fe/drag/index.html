@@ -158,53 +158,54 @@
                         
                         <p>拖拽的基本原理：<br />
 当mousedown时记下鼠标点击位置离拖拽容器左边沿的距离和上边沿的距离，即tmpX,tmpY；mousemove时通过定位拖拽容器的style.left/style.top，使拖拽容器进行移动，定位到哪里则由刚刚的tmpX/tmpY和当前鼠标所在位置计算得出；mouseup时，结束移动。<br />
-设置拖拽容器可拖拽的范围，若未设置，则默认为当前窗口可视范围。Note：在设置范围的时候使用Math.max/min来处理，而不是用If语句判断，用后者的话会导致快速拖拽时未达到容许范围边沿即停止的状况。<br />
-Html代码：<br />
-<code lang="html"></p>
-<div id="box">
+设置拖拽容器可拖拽的范围，若未设置，则默认为当前窗口可视范围。Note：在设置范围的时候使用Math.max/min来处理，而不是用If语句判断，用后者的话会导致快速拖拽时未达到容许范围边沿即停止的状况。<br /></p>
+
+<p>Html代码：</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;</span>
    drag me
-</div>
-<p></code><br />
-Css代码：<br />
-<code lang="css"><br />
-#box{position:absolute; left:100px; top:100px; padding:5px; background:#f0f3f9; font-size:12px; -moz-box-shadow:2px 2px 4px #666666; -webkit-box-shadow:2px 2px 4px #666666;width: 100px;height: 100px;}<br />
-</code><br />
-Javascript代码：<br />
-<code lang="javascript"><br />
-var params = {<br />
-	left: 100,<br />
-	top: 100,<br />
-	currentX: 0,<br />
-	currentY: 0,<br />
-	flag: false<br />
-};</p>
-<p>var obox = document.getElementById("box");<br />
-Dragme(obox);<br />
-//拖拽的实现<br />
-function Dragme(boxdrag){<br />
-	//o是移动对象<br />
-	boxdrag.onmousedown = function(event){<br />
-		params.flag = true;<br />
-		var e = event;<br />
-		params.currentX = e.clientX;<br />
-		params.currentY = e.clientY;<br />
-	};<br />
-	document.onmouseup = function(){<br />
-		params.flag = false;<br />
-		params.left = boxdrag.style.left;<br />
-		params.top = boxdrag.style.top;<br />
-	};<br />
-	document.onmousemove = function(event){<br />
-		var e = event ? event: window.event;<br />
-		if(params.flag){<br />
-			var nowX = e.clientX, nowY = e.clientY;<br />
-			var disX = nowX - params.currentX, disY = nowY - params.currentY;<br />
-			boxdrag.style.left = parseInt(params.left) + disX + "px";<br />
-			boxdrag.style.top = parseInt(params.top) + disY + "px";<br />
-		}<br />
-	}<br />
-};<br />
-</code></p>
+<span class="nt">&lt;/div&gt;</span></code></pre></div>
+
+<p>Css代码：</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nf">#box</span><span class="p">{</span><span class="k">position</span><span class="o">:</span><span class="k">absolute</span><span class="p">;</span> <span class="k">left</span><span class="o">:</span><span class="m">100px</span><span class="p">;</span> <span class="k">top</span><span class="o">:</span><span class="m">100px</span><span class="p">;</span> <span class="k">padding</span><span class="o">:</span><span class="m">5px</span><span class="p">;</span> <span class="k">background</span><span class="o">:</span><span class="m">#f0f3f9</span><span class="p">;</span> <span class="k">font-size</span><span class="o">:</span><span class="m">12px</span><span class="p">;</span> <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span><span class="m">2px</span> <span class="m">2px</span> <span class="m">4px</span> <span class="m">#666666</span><span class="p">;</span> <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span><span class="m">2px</span> <span class="m">2px</span> <span class="m">4px</span> <span class="m">#666666</span><span class="p">;</span><span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span><span class="k">height</span><span class="o">:</span> <span class="m">100px</span><span class="p">;}</span></code></pre></div>
+
+<p>JavaScript代码：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">left</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+	<span class="nx">top</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+	<span class="nx">currentX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+	<span class="nx">currentY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+	<span class="nx">flag</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">obox</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">);</span>
+<span class="nx">Dragme</span><span class="p">(</span><span class="nx">obox</span><span class="p">);</span>
+<span class="c1">//拖拽的实现</span>
+<span class="kd">function</span> <span class="nx">Dragme</span><span class="p">(</span><span class="nx">boxdrag</span><span class="p">){</span>
+	<span class="c1">//o是移动对象</span>
+	<span class="nx">boxdrag</span><span class="p">.</span><span class="nx">onmousedown</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+		<span class="nx">params</span><span class="p">.</span><span class="nx">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="nx">event</span><span class="p">;</span>
+		<span class="nx">params</span><span class="p">.</span><span class="nx">currentX</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">;</span>
+		<span class="nx">params</span><span class="p">.</span><span class="nx">currentY</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">;</span>
+	<span class="p">};</span>
+	<span class="nb">document</span><span class="p">.</span><span class="nx">onmouseup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+		<span class="nx">params</span><span class="p">.</span><span class="nx">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+		<span class="nx">params</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">boxdrag</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+		<span class="nx">params</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">boxdrag</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+	<span class="p">};</span>
+	<span class="nb">document</span><span class="p">.</span><span class="nx">onmousemove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+		<span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">?</span> <span class="nx">event</span><span class="o">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">flag</span><span class="p">){</span>
+			<span class="kd">var</span> <span class="nx">nowX</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">nowY</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">;</span>
+			<span class="kd">var</span> <span class="nx">disX</span> <span class="o">=</span> <span class="nx">nowX</span> <span class="o">-</span> <span class="nx">params</span><span class="p">.</span><span class="nx">currentX</span><span class="p">,</span> <span class="nx">disY</span> <span class="o">=</span> <span class="nx">nowY</span> <span class="o">-</span> <span class="nx">params</span><span class="p">.</span><span class="nx">currentY</span><span class="p">;</span>
+			<span class="nx">boxdrag</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span> <span class="o">+</span> <span class="nx">disX</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
+			<span class="nx">boxdrag</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">top</span><span class="p">)</span> <span class="o">+</span> <span class="nx">disY</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">};</span></code></pre></div>
+
 
                         <br>
                     

@@ -121,14 +121,6 @@
 		} ,
 	
 		{
-		  "title"      : "js获取屏幕宽度高度",
-		  "category"   : "",
-		  "url"        : "/fe/js-screen-width",
-		  "date"       : "2013-01-15 11:56:43 -0500",
-		  "shortdate"  : "January 15, 2013"
-		} ,
-	
-		{
 		  "title"      : "元素移动",
 		  "category"   : "",
 		  "url"        : "/fe/element-move",

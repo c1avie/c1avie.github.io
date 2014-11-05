@@ -156,68 +156,69 @@
                     </header>
                     <div class="post-body bordered-bottom" itemprop="description">
                         
-                        <p>html代码：<br />
-<code lang="html"><br />
-<!-- 弹出层部分 --></p>
-<div id="box">
-    <span id="closeBtn" style="color:white">关闭</span>  </p>
-<p><a id="gameMerry" href="http://gamemake.org/html5_game/shengdan/">挑战一下</a></p>
-</div>
-<p></code></p>
-<p>css代码：<br />
-<code lang="css"><br />
-/*弹出层部分*/<br />
-#box {display: none;position: absolute;width: 440px;height: 284px;background: url(../images/layer.jpg) no-repeat;z-index: 200;<br />
-}<br />
-#closeBtn {position: absolute;right: 10px;top: 10px;cursor: pointer;color: #000	;<br />
-}<br />
-#greybackground {background: #000;display: block;z-index: 100;width: 100%;position: absolute;top: 0;left: 0;<br />
-}<br />
-#box p {position: absolute;left: 180px;bottom: 40px;}<br />
-#box p a {color: #fff;font-size: 16px;text-decoration: underline;}<br />
-#box p a:hover {text-decoration: none;}<br />
-</code></p>
-<p>js代码：<br />
-<code lang="js"><br />
-$(function(){<br />
-　　var screenwidth,screenheight,mytop,getPosLeft,getPosTop;<br />
-　　screenwidth = $(window).width();<br />
-　　screenheight = $(window).height();<br />
-　　mytop = $(document).scrollTop();<br />
-　　getPosLeft = screenwidth/2 - 220;<br />
-　　getPosTop = screenheight/2 - 142;<br />
-　　$("#box").css({"left":getPosLeft,"top":getPosTop});   </p>
-<p>    $(window).resize(function(){<br />
-    　　screenwidth = $(window).width();<br />
-    　　screenheight = $(window).height();<br />
-    　　mytop = $(document).scrollTop();<br />
-    　　getPosLeft = screenwidth/2 - 220;<br />
-    　　getPosTop = screenheight/2 - 142;<br />
-    　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop});<br />
-    });    </p>
-<p>  　　$(window).scroll(function(){<br />
-    　　screenwidth = $(window).width();<br />
-    　　screenheight = $(window).height();<br />
-    　　mytop = $(document).scrollTop();<br />
-    　　getPosLeft = screenwidth/2 - 220;<br />
-    　　getPosTop = screenheight/2 - 142;<br />
-    　　$("#box").css({"left":getPosLeft,"top":getPosTop+mytop});<br />
-  　　});    </p>
-<p>  　　<br />
-    　　$("#box").fadeIn("fast");<br />
-    　　$("body").append("
-<div id="greybackground"></div>
-<p>");<br />
-    　　var documentheight = $(document).height();<br />
-    　　$("#greybackground").css({"opacity":"0.5","height":documentheight});        </p>
-<p>  　　$("#closeBtn").click(function() {<br />
-    　　$("#box").hide();<br />
-    　　$("#greybackground").remove();<br />
-    　　return false;<br />
-  　　});<br />
-});<br />
-</code></p>
-<p>项目案例：http://newindex.stuzone.com/stuzone_page/</p>
+                        遮罩层这种需求在项目中经常会遇到，如欢迎页或者新功能介绍页等。下面就简单介绍下如何实现这种需求。<br />
+
+html代码：
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 弹出层部分 --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">&quot;closeBtn&quot;</span> <span class="na">style=</span><span class="s">&quot;color:white&quot;</span><span class="nt">&gt;</span>关闭<span class="nt">&lt;/span&gt;</span>  
+<span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;gameMerry&quot;</span> <span class="na">href=</span><span class="s">&quot;http://gamemake.org/html5_game/shengdan/&quot;</span><span class="nt">&gt;</span>挑战一下<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></div>
+
+css代码：
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/*弹出层部分*/</span>
+<span class="nf">#box</span> <span class="p">{</span><span class="k">display</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span><span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span><span class="k">width</span><span class="o">:</span> <span class="m">440px</span><span class="p">;</span><span class="k">height</span><span class="o">:</span> <span class="m">284px</span><span class="p">;</span><span class="k">background</span><span class="o">:</span> <span class="sx">url(../images/layer.jpg)</span> <span class="k">no-repeat</span><span class="p">;</span><span class="k">z-index</span><span class="o">:</span> <span class="m">200</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#closeBtn</span> <span class="p">{</span><span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span><span class="k">right</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span><span class="k">top</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span><span class="k">cursor</span><span class="o">:</span> <span class="k">pointer</span><span class="p">;</span><span class="k">color</span><span class="o">:</span> <span class="m">#000</span>	<span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#greybackground</span> <span class="p">{</span><span class="k">background</span><span class="o">:</span> <span class="m">#000</span><span class="p">;</span><span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span><span class="k">z-index</span><span class="o">:</span> <span class="m">100</span><span class="p">;</span><span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span><span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span><span class="k">top</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span><span class="k">left</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#box</span> <span class="nt">p</span> <span class="p">{</span><span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span><span class="k">left</span><span class="o">:</span> <span class="m">180px</span><span class="p">;</span><span class="k">bottom</span><span class="o">:</span> <span class="m">40px</span><span class="p">;}</span>
+<span class="nf">#box</span> <span class="nt">p</span> <span class="nt">a</span> <span class="p">{</span><span class="k">color</span><span class="o">:</span> <span class="m">#fff</span><span class="p">;</span><span class="k">font-size</span><span class="o">:</span> <span class="m">16px</span><span class="p">;</span><span class="k">text-decoration</span><span class="o">:</span> <span class="k">underline</span><span class="p">;}</span>
+<span class="nf">#box</span> <span class="nt">p</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span><span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;}</span></code></pre></div>
+
+js代码：
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="err">　　</span><span class="kd">var</span> <span class="nx">screenwidth</span><span class="p">,</span><span class="nx">screenheight</span><span class="p">,</span><span class="nx">mytop</span><span class="p">,</span><span class="nx">getPosLeft</span><span class="p">,</span><span class="nx">getPosTop</span><span class="p">;</span>
+<span class="err">　　</span><span class="nx">screenwidth</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">width</span><span class="p">();</span>
+<span class="err">　　</span><span class="nx">screenheight</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">height</span><span class="p">();</span>
+<span class="err">　　</span><span class="nx">mytop</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">();</span>
+<span class="err">　　</span><span class="nx">getPosLeft</span> <span class="o">=</span> <span class="nx">screenwidth</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">220</span><span class="p">;</span>
+<span class="err">　　</span><span class="nx">getPosTop</span> <span class="o">=</span> <span class="nx">screenheight</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">142</span><span class="p">;</span>
+<span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#box&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span><span class="s2">&quot;left&quot;</span><span class="o">:</span><span class="nx">getPosLeft</span><span class="p">,</span><span class="s2">&quot;top&quot;</span><span class="o">:</span><span class="nx">getPosTop</span><span class="p">});</span>   
+    <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">resize</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="err">　　</span><span class="nx">screenwidth</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">width</span><span class="p">();</span>
+    <span class="err">　　</span><span class="nx">screenheight</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">height</span><span class="p">();</span>
+    <span class="err">　　</span><span class="nx">mytop</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">();</span>
+    <span class="err">　　</span><span class="nx">getPosLeft</span> <span class="o">=</span> <span class="nx">screenwidth</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">220</span><span class="p">;</span>
+    <span class="err">　　</span><span class="nx">getPosTop</span> <span class="o">=</span> <span class="nx">screenheight</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">142</span><span class="p">;</span>
+    <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#box&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span><span class="s2">&quot;left&quot;</span><span class="o">:</span><span class="nx">getPosLeft</span><span class="p">,</span><span class="s2">&quot;top&quot;</span><span class="o">:</span><span class="nx">getPosTop</span><span class="o">+</span><span class="nx">mytop</span><span class="p">});</span>
+    <span class="p">});</span>    
+  <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scroll</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="err">　　</span><span class="nx">screenwidth</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">width</span><span class="p">();</span>
+    <span class="err">　　</span><span class="nx">screenheight</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">height</span><span class="p">();</span>
+    <span class="err">　　</span><span class="nx">mytop</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">();</span>
+    <span class="err">　　</span><span class="nx">getPosLeft</span> <span class="o">=</span> <span class="nx">screenwidth</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">220</span><span class="p">;</span>
+    <span class="err">　　</span><span class="nx">getPosTop</span> <span class="o">=</span> <span class="nx">screenheight</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">142</span><span class="p">;</span>
+    <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#box&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span><span class="s2">&quot;left&quot;</span><span class="o">:</span><span class="nx">getPosLeft</span><span class="p">,</span><span class="s2">&quot;top&quot;</span><span class="o">:</span><span class="nx">getPosTop</span><span class="o">+</span><span class="nx">mytop</span><span class="p">});</span>
+  <span class="err">　　</span><span class="p">});</span>    
+  <span class="err">　　</span>
+    <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#box&quot;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">);</span>
+    <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="s2">&lt;div id=&quot;</span><span class="nx">greybackground</span><span class="s2">&quot;&gt;&lt;/div&gt;</span>
+<span class="s2">&quot;</span><span class="p">);</span>
+    <span class="err">　　</span><span class="kd">var</span> <span class="nx">documentheight</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">height</span><span class="p">();</span>
+    <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#greybackground&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span><span class="s2">&quot;opacity&quot;</span><span class="o">:</span><span class="s2">&quot;0.5&quot;</span><span class="p">,</span><span class="s2">&quot;height&quot;</span><span class="o">:</span><span class="nx">documentheight</span><span class="p">});</span>        
+  <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#closeBtn&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#box&quot;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+    <span class="err">　　</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#greybackground&quot;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="err">　　</span><span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="err">　　</span><span class="p">});</span>
+<span class="p">});</span></code></pre></div>
+
+项目案例：<a href="http://newindex.stuzone.com/stuzone_page/">http://newindex.stuzone.com/stuzone_page/</a>
 
                         <br>
                     

@@ -156,59 +156,69 @@
                     </header>
                     <div class="post-body bordered-bottom" itemprop="description">
                         
-                        <p>1.下面的代码输出结构分别是什么<br />
-<code lang="javascript"><br />
-function Person() {<br />
-this.myName = 'Tom';<br />
-}<br />
-Person.prototype.sayName = function() {<br />
-var myName = 'Jerry';<br />
-console.log(this.myName);<br />
-}<br />
-Person.prototype.sayHello = function() {<br />
-setTimeout(this.sayName,100);<br />
-}<br />
-var p = new Person();<br />
-p.sayName();<br />
-p.sayHello();<br />
-</code><br />
-上面的代码输出结果为Tom和undefined 后面为undefined是因为没有正确调用方法，将setTimeout(this.sayName,100)改为setTimeout(this.sayName（）,100)就能正确返回Tom了</p>
-<p>2.以下是一段js代码，其中element是一个dom元素。请说出该函数是否存在问题，如果有，请指出问题所在，并提供解决方案。<br />
-<code lang="javascript"><br />
-function foo(element) {<br />
-var str = 'uc';<br />
-element.onclick = function() {<br />
-console.log(str + element.tagName);<br />
-};<br />
-}<br />
-</code><br />
-该函数为元素绑定了一个onclick事件，但是如果后面想继续为该元素绑定事件时，事件会被覆盖 解决方法是<br />
-<code lang="javascript"><br />
-var header = document.getElementById("header");<br />
-addEvent(header,'click',test);<br />
-function addEvent(element,ev,func) {<br />
-if(element.attachEvent) {<br />
-element.attachEvent('on' + ev,function() {<br />
-func();<br />
-});<br />
-}<br />
-else {<br />
-element.addEventListener(ev,function(event) {<br />
-func();<br />
-});<br />
-}<br />
-}<br />
-function test() {<br />
-alert("test");<br />
-}<br />
-</code><br />
-3.请用js实现对象的深度克隆<br />
-查了下资料，这里有篇资料讲的挺好的<br />
-http://sentsin.com/web/21.html<br />
-4.设计一个页面的布局<br />
-a)页面自适应屏幕宽度<br />
-b)侧边栏固定宽度300px,其他元素均自适应宽度<br />
-c）页头、导航栏、页脚固定宽度40px，正文部分按内容自动撑高<br />
+                        <p>有学长参加了UC2014的校招笔试题，并带回来了一张试卷，我就试着自己做了下。</p>
+
+<p>1.下面的代码输出结构分别是什么</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Person</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">myName</span> <span class="o">=</span> <span class="s1">&#39;Tom&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">myName</span> <span class="o">=</span> <span class="s1">&#39;Jerry&#39;</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">myName</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayHello</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">setTimeout</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sayName</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">sayHello</span><span class="p">();</span></code></pre></div>
+
+<p>上面的代码输出结果为Tom和undefined </p>
+
+<p>后面为undefined是因为没有正确调用方法，将setTimeout(this.sayName,100)改为setTimeout(this.sayName（）,100)就能正确返回Tom了</p>
+
+<p>2.以下是一段js代码，其中element是一个dom元素。请说出该函数是否存在问题，如果有，请指出问题所在，并提供解决方案。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;uc&#39;</span><span class="p">;</span>
+	<span class="nx">element</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span> <span class="o">+</span> <span class="nx">element</span><span class="p">.</span><span class="nx">tagName</span><span class="p">);</span>
+	<span class="p">};</span>
+<span class="p">}</span></code></pre></div>
+
+<p>该函数为元素绑定了一个onclick事件，但是如果后面想继续为该元素绑定事件时，事件会被覆盖 解决方法是</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">header</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">);</span>
+	<span class="nx">addEvent</span><span class="p">(</span><span class="nx">header</span><span class="p">,</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="nx">test</span><span class="p">);</span>
+<span class="kd">function</span> <span class="nx">addEvent</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span><span class="nx">ev</span><span class="p">,</span><span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">element</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">&#39;on&#39;</span> <span class="o">+</span> <span class="nx">ev</span><span class="p">,</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">func</span><span class="p">();</span>
+		<span class="p">});</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="p">{</span>
+		<span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">ev</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">func</span><span class="p">();</span>
+		<span class="p">});</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>3.请用js实现对象的深度克隆</p>
+
+<p>查了下资料，这里有篇资料讲的挺好的
+http://sentsin.com/web/21.html</p>
+
+<p>4.设计一个页面的布局</p>
+
+<p>a)页面自适应屏幕宽度</p>
+
+<p>b)侧边栏固定宽度300px,其他元素均自适应宽度</p>
+
+<p>c）页头、导航栏、页脚固定宽度40px，正文部分按内容自动撑高
 具体可参见https://github.com/c1avie/UC2014</p>
 
                         <br>

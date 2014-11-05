@@ -21,11 +21,6 @@ callback([
   } ,
 
   {
-    "text": "js获取屏幕宽度高度",
-    "href": "/fe/js-screen-width"
-  } ,
-
-  {
     "text": "在外部如何调去wordpress的近期文章",
     "href": "/rd/wordpress-near"
   } ,

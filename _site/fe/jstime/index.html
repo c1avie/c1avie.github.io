@@ -151,78 +151,83 @@
                         <div class="cursive" style="color: #000; font-style:italic;"></div>
                         <div class="post-info text-center small">
                             <span class="entry-date date published updated"><time datetime="2013-06-13T02:22:28-04:00" class="post-time" itemprop="datePublished">13 Jun 2013</time><span>
-                            in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;1 minute read</span>
+                            in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
                         </div>
                     </header>
                     <div class="post-body bordered-bottom" itemprop="description">
                         
-                        <p>线上测试地址：http://uctest.ucweb.com:10070/c1avie/test/time.html<br />
-具体实现效果：今天是6月13日 星期四 第16周</p>
-<p>定义一些变量，具体就不多说了。<br />
-            var d = new Date(),<br />
-		year = d.getFullYear(),<br />
-	 	month = d.getMonth(),<br />
-	 	week = d.getDay(),<br />
-	 	day = d.getDate(),<br />
-		monthDay = new Array(31,28,31,30,31,30,31,31,30,31,30,31),<br />
-		weekDay = "",<br />
-		isLeapYear = false;  //是否为闰年</p>
-<p>将数字转换为汉字，因此用了一个switch的转换<br />
-	switch(week) {<br />
-		case 0:<br />
-			weekDay = "日";<br />
-			break;<br />
-		case 1:<br />
-			weekDay = "一";<br />
-			break;<br />
-		case 2:<br />
-			weekDay = "二";<br />
-			break;<br />
-		case 3:<br />
-			weekDay = "三";<br />
-			break;<br />
-		case 4:<br />
-			weekDay = "四";<br />
-			break;<br />
-		case 5:<br />
-			weekDay = "五";<br />
-			break;<br />
-		case 6:<br />
-			weekDay = "六";<br />
-			break;<br />
-	}</p>
-<p>判断是否为闰年，大家应该都不陌生吧<br />
-	if( ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0) ) {<br />
-		isLeapYear = true;<br />
-	}</p>
-<p>循环计算天数<br />
-	function getCurrentDay(theMonth,theDay) {<br />
-		var currentDay = 0;<br />
-		for(var i = 0;i < monthDay.length;i++) {<br />
-			if(i < theMonth) {<br />
-				if(isLeapYear && i == 1) {<br />
-					currentDay = currentDay + 29;<br />
-				}<br />
-				else {<br />
-					currentDay = currentDay + monthDay[i];<br />
-				}<br />
-			}<br />
-			if(i == theMonth) {<br />
-				currentDay = currentDay + theDay;<br />
-			}<br />
-		}<br />
-		return currentDay;<br />
-	}</p>
-<p>我们学校忘记是什么时候开学的了，大致记得是2.24开始的第一周，因此这里是把3.24之前的天数减去<br />
-var nowDay = getCurrentDay(month,day),<br />
-	    initialDay = getCurrentDay(1,23),<br />
-	    weekYear = parseInt((nowDay - initialDay) / 7);<br />
-	if(week != 6) {<br />
-		weekYear = weekYear + 1;<br />
-	}<br />
-	var today = document.getElementById("today");<br />
-	today.innerHTML = "今天是" + (month + 1) + "月" + day + "日" + "<span style="margin-left: 15px;">" + "星期" + weekDay + "</span>" + "<span style="margin-left: 15px;">" + "第" + weekYear + "周" + "</span>";<br />
-其实我是想算农历的，但是不知道阳历与农历的转换算法，只好作罢。</p>
+                        <p>因为项目需要，写了一个js计算今天是几月几号，星期几，第几周的插件。
+线上测试地址：<a href="http://www.stuzone.com/">http://www.stuzone.com/</a></p>
+
+<p>具体实现效果：今天是6月13日 星期四 第16周</p>
+
+<p>定义一些变量，具体就不多说了。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+	<span class="nx">year</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">(),</span>
+ 	<span class="nx">month</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">(),</span>
+ 	<span class="nx">week</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDay</span><span class="p">(),</span>
+ 	<span class="nx">day</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">(),</span>
+	<span class="nx">monthDay</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">),</span>
+	<span class="nx">weekDay</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+	<span class="nx">isLeapYear</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>  <span class="c1">//是否为闰年</span>
+<span class="err">将数字转换为汉字，因此用了一个</span><span class="k">switch</span><span class="err">的转换</span>
+<span class="k">switch</span><span class="p">(</span><span class="nx">week</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+		<span class="nx">weekDay</span> <span class="o">=</span> <span class="s2">&quot;日&quot;</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+		<span class="nx">weekDay</span> <span class="o">=</span> <span class="s2">&quot;一&quot;</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+		<span class="nx">weekDay</span> <span class="o">=</span> <span class="s2">&quot;二&quot;</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+		<span class="nx">weekDay</span> <span class="o">=</span> <span class="s2">&quot;三&quot;</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+		<span class="nx">weekDay</span> <span class="o">=</span> <span class="s2">&quot;四&quot;</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">5</span><span class="o">:</span>
+		<span class="nx">weekDay</span> <span class="o">=</span> <span class="s2">&quot;五&quot;</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">6</span><span class="o">:</span>
+		<span class="nx">weekDay</span> <span class="o">=</span> <span class="s2">&quot;六&quot;</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="err">判断是否为闰年，大家应该都不陌生吧</span>
+<span class="k">if</span><span class="p">(</span> <span class="p">((</span><span class="nx">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))</span> <span class="o">||</span> <span class="p">(</span><span class="nx">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="nx">isLeapYear</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="err">循环计算天数</span>
+<span class="kd">function</span> <span class="nx">getCurrentDay</span><span class="p">(</span><span class="nx">theMonth</span><span class="p">,</span><span class="nx">theDay</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">currentDay</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">monthDay</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">theMonth</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">isLeapYear</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">currentDay</span> <span class="o">=</span> <span class="nx">currentDay</span> <span class="o">+</span> <span class="mi">29</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="k">else</span> <span class="p">{</span>
+				<span class="nx">currentDay</span> <span class="o">=</span> <span class="nx">currentDay</span> <span class="o">+</span> <span class="nx">monthDay</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">==</span> <span class="nx">theMonth</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">currentDay</span> <span class="o">=</span> <span class="nx">currentDay</span> <span class="o">+</span> <span class="nx">theDay</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">currentDay</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//我们学校忘记是什么时候开学的了，大致记得是2.24开始的第一周，因此这里是把3.24之前的天数减去</span>
+<span class="kd">var</span> <span class="nx">nowDay</span> <span class="o">=</span> <span class="nx">getCurrentDay</span><span class="p">(</span><span class="nx">month</span><span class="p">,</span><span class="nx">day</span><span class="p">),</span>
+	<span class="nx">initialDay</span> <span class="o">=</span> <span class="nx">getCurrentDay</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">23</span><span class="p">),</span>
+	<span class="nx">weekYear</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">((</span><span class="nx">nowDay</span> <span class="o">-</span> <span class="nx">initialDay</span><span class="p">)</span> <span class="o">/</span> <span class="mi">7</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">week</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">weekYear</span> <span class="o">=</span> <span class="nx">weekYear</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kd">var</span> <span class="nx">today</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;today&quot;</span><span class="p">);</span>
+	<span class="nx">today</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;今天是&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">month</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;月&quot;</span> <span class="o">+</span> <span class="nx">day</span> <span class="o">+</span> <span class="s2">&quot;日&quot;</span> <span class="o">+</span> <span class="s2">&quot;&lt;span style=&quot;</span><span class="nx">margin</span><span class="o">-</span><span class="nx">left</span><span class="o">:</span> <span class="mi">15</span><span class="nx">px</span><span class="p">;</span><span class="s2">&quot;&gt;&quot;</span> <span class="o">+</span> <span class="s2">&quot;星期&quot;</span> <span class="o">+</span> <span class="nx">weekDay</span> <span class="o">+</span> <span class="s2">&quot;&lt;/span&gt;&quot;</span> <span class="o">+</span> <span class="s2">&quot;&lt;span style=&quot;</span><span class="nx">margin</span><span class="o">-</span><span class="nx">left</span><span class="o">:</span> <span class="mi">15</span><span class="nx">px</span><span class="p">;</span><span class="s2">&quot;&gt;&quot;</span> <span class="o">+</span> <span class="s2">&quot;第&quot;</span> <span class="o">+</span> <span class="nx">weekYear</span> <span class="o">+</span> <span class="s2">&quot;周&quot;</span> <span class="o">+</span> <span class="s2">&quot;&lt;/span&gt;&quot;</span><span class="p">;</span></code></pre></div>
+
+<p>其实我是想算农历的，但是不知道阳历与农历的转换算法，只好作罢。</p>
 
                         <br>
                     

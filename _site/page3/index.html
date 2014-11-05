@@ -175,8 +175,6 @@
 	                
 	                	<p>This is my first time doing the design for Web page.It cost me about five hours today.Although it is still rough,I satisfied it.I learn a lot from practiong.Thanks my team to help me.
 
-
-
 &hellip;</p>
 	                    <div class="text-center">
 	                    
@@ -218,18 +216,6 @@
 	                
 	                
 	                	<p>E6下的背景图片每次使用都会重新发送请求，这会很影响代码的效率，用Css或Js可以解决这个问题
-用CSS实现：
-html {filter:expression(document.execCommand("BackgroundImageCache", false, true));}
-用JS实现：
-&lt;script type="text/javascript"&gt;
-// IE6 background image caching fix.
-// Include this JavaScript a the top of your page.
-try {
-document.execCommand("BackgroundImageCache", false, true);
-} catch(e) {}
-&lt;/script&gt;
-&nbsp;
-
 
 &hellip;</p>
 	                    <div class="text-center">
@@ -271,81 +257,12 @@ document.execCommand("BackgroundImageCache", false, true);
 	                <div class="post-body bordered-bottom">
 	                
 	                
-	                	<p>这里介绍一个我自己写的一个接口，
-先填写一些连接数据库的基本配置
-
-&nbsp;
-接着就是连接了，
-其中mysql_query("SET NAMES utf8");防止文字乱码
-接着就是输出了
-我想输出去我在博客中发布的5篇文章的题目，因此有了以上代码
-其中guid为表wp_posts的title
-
+	                	<p>这里介绍一个我自己写的一个接口，先填写一些连接数据库的基本配置
 
 &hellip;</p>
 	                    <div class="text-center">
 	                    
 		                <a href="/rd/wordpress-near" data-toggle="tooltip" title="Read more about 在外部如何调去wordpress的近期文章" class="more-link btn btn-danger btn-large">
-		                    <i class="icon-link"></i> read more...
-		                </a>
-		                
-		                </div>
-	                </div>
-	            </article>
-	        </div>
-			
-	
-		
-		
-		
-		
-		
-			
-	        
-	        
-	        
-	        
-	        <div class="row">
-	            <article class="post post col-md-8 col-md-offset-2">
-	               <header class="post-header">
-	               
-	                    
-	                    <h2 class="post-title text-center super lighter bordered-bottom">
-	                        <a href="/fe/js-screen-width">js获取屏幕宽度高度</a>
-	                    
-	                    </h2>
-	                    <div class="post-info text-center small">
-	                        <time datetime="2013-01-15T11:56:43-05:00" class="post-time">15 Jan 2013</time>
-	                        in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
-	                    </div>
-	                </header>
-	                <div class="post-body bordered-bottom">
-	                
-	                
-	                	<p>今天在想着怎么实现背景图片随着电脑屏幕的变化而自适应的时候，就想知道电脑屏幕的分辨率为多少。它的尺寸可以有很多种方法获得，查阅资料总结了下：
-在google浏览器中按F12到console中
-
-获取屏幕分辨率：alert(screen.width);  alert(screen.height);  我试了下width大写，报undefined，看来严格区分大小写。
-获取屏幕可用大小：alert(screen.availWidth);  alert(screen.availHeight);
-获取网页可见域宽高：alert(document.body.clientWidth);  alert(document.body.clientHeight);
-获取网页可见区域宽(包括边线的宽)：alert(document.body.offsetWidth);
-获取网页可见区域高(包括边线的宽)：alert(document.body.offsetHeight);
-获取网页正文全文宽：alert(document.body.scrollWidth);
-获取网页正文全文高：alert(document.body.scrollHeight);
-获取网页被卷去的高：alert(document.body.scrollTop);
-获取网页被卷去的左：alert(document.body.scrollLeft);
-获取网页正文部分上：alert(window.screenTop);
-获取网页正文部分左：alert(window.screenLeft);
-获取屏幕分辨率的宽：alert(window.screen.width);
-获取屏幕分辨率的高：alert(window.screen.height);
-获取屏幕可用工作区宽度：alert(window.screen.availWidth);
-获取屏幕可用工作区高度：alert(window.screen.availHeight);
-
-
-&hellip;</p>
-	                    <div class="text-center">
-	                    
-		                <a href="/fe/js-screen-width" data-toggle="tooltip" title="Read more about js获取屏幕宽度高度" class="more-link btn btn-danger btn-large">
 		                    <i class="icon-link"></i> read more...
 		                </a>
 		                
@@ -381,16 +298,8 @@ document.execCommand("BackgroundImageCache", false, true);
 	                </header>
 	                <div class="post-body bordered-bottom">
 	                
-	                <p class = "lead">一个方向键控制元素移动的函数
-但是经过多次尝试终于找出了问题所在.
-
-style.left并不能获取元素的左偏移量,alert之后始终是undefined.
-最后查阅了下发现style并不能获取外部样式中left值
-需要写成这样
-
-当然用jquery获取也行
-
-
+	                
+	                	<p>一个方向键控制元素移动的函数
 
 &hellip;</p>
 	                    <div class="text-center">
@@ -433,16 +342,53 @@ style.left并不能获取元素的左偏移量,alert之后始终是undefined.
 	                
 	                
 	                	<p>2012结束了,感觉很想写点什么.纪念逝去的2012.大一下的很多事都记不太清了.我努力的回忆一下,貌似还真的记不清了.可能也没什么特别出彩的事吧,看来有些东西还真的需要记录一下.记忆这东西不靠谱.噢,对那个寒假还有点印象,那好像是我最努力的一个假期了吧,在那期间学习了java以及js等,虽然很渣.然后慢慢的从java web转到前端去了.前端真的是一个妙不可言的领域,并渐渐的爱上了它.一直坚持到了现在.
-再让我感受深刻的就是暑假了,当时"助跑网","肥羊地图"地图这两个项目快把我给整死,天天被逼着做静态页面,但还是坚持下来了.也有过很美好的回忆,或许很多年后我仍我记得,真心的想说声谢谢.大概8.17号才回的家,错过了很多同学聚会.但觉得还是挺充实的.
-也没在家呆了几天,就被同学拉到学校参加"数学建模比赛",我是纯粹打酱油的.这和后来的一个挑战杯让我深刻的认识到如果你不喜欢做这个,你不尽心去做这个,你是不会有收获的.还不如不做.
-学习方面嘛,感觉js,php的进展太缓慢了点,虽然知道这事也不能急,得慢慢来.总是有太多的事.还是要多多看书.js,php要抓起来.
-先到这吧.再见,2012.你好,2013.
-
 
 &hellip;</p>
 	                    <div class="text-center">
 	                    
 		                <a href="/about/2012-summary" data-toggle="tooltip" title="Read more about 2012总结" class="more-link btn btn-danger btn-large">
+		                    <i class="icon-link"></i> read more...
+		                </a>
+		                
+		                </div>
+	                </div>
+	            </article>
+	        </div>
+			
+	
+		
+		
+		
+		
+		
+			
+	        
+	        
+	        
+	        
+	        <div class="row">
+	            <article class="post post col-md-8 col-md-offset-2">
+	               <header class="post-header">
+	               
+	                    
+	                    <h2 class="post-title text-center super lighter bordered-bottom">
+	                        <a href="/fe/ie-onmouseover-bug">IE下的onmouseover bug</a>
+	                    
+	                    </h2>
+	                    <div class="post-info text-center small">
+	                        <time datetime="2012-12-31T08:35:14-05:00" class="post-time">31 Dec 2012</time>
+	                        in <span class="post-tags"><a href="/categories/index.html#fe" data-toggle="tooltip" title="Other posts from the Fe category" rel="tag">Fe</a></span>&nbsp;<span class="post-tags"><i class="icon-time"></i>&nbsp;Less than 1 minute read</span>
+	                    </div>
+	                </header>
+	                <div class="post-body bordered-bottom">
+	                
+	                
+	                	<p>昨天（这是以前在点点博客上发的博文，算是移植过来了吧）在帮一个同学看一个下拉菜单的时候，碰到了一段js代码
+
+&hellip;</p>
+	                    <div class="text-center">
+	                    
+		                <a href="/fe/ie-onmouseover-bug" data-toggle="tooltip" title="Read more about IE下的onmouseover bug" class="more-link btn btn-danger btn-large">
 		                    <i class="icon-link"></i> read more...
 		                </a>
 		                
