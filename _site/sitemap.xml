@@ -16,6 +16,10 @@
     
     
     <url>
+        <loc>/javascript/singleton</loc>
+    </url>
+    
+    <url>
         <loc>/javascript/module</loc>
     </url>
     

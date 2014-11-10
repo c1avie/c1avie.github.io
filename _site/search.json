@@ -1,6 +1,14 @@
 [
 	
 		{
+		  "title"      : "Singleton模式",
+		  "category"   : "JavaScript",
+		  "url"        : "/javascript/singleton",
+		  "date"       : "2014-11-10 00:00:00 -0500",
+		  "shortdate"  : "November 10, 2014"
+		} ,
+	
+		{
 		  "title"      : "Module模式",
 		  "category"   : "JavaScript",
 		  "url"        : "/javascript/module",

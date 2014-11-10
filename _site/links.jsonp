@@ -98,6 +98,11 @@ callback([
   {
     "text": "Module模式",
     "href": "/javascript/module"
+  } ,
+
+  {
+    "text": "Singleton模式",
+    "href": "/javascript/singleton"
   } 
 
 ])

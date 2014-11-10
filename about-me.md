@@ -24,7 +24,7 @@ image:
 * 公司部门：百度 LBS地图基础业务部
 * 工作内容：参与开发维护百度地图移动端主站，webapp调起Native客户端项目，Web组件API项目，lbs-web团队主站
 * 项目案例
-	* http://developer.baidu.com/map/index.php?title=webcomponent
+  * http://developer.baidu.com/map/index.php?title=webcomponent
 	* http://lbsweb.baidu.com/（需要百度内网访问）
 	* http://map.baidu.com/mobile/
 
