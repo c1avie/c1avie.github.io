@@ -93,6 +93,11 @@ callback([
   {
     "text": "带原型的Constructor",
     "href": "/javascript/prototype-constructor"
+  } ,
+
+  {
+    "text": "Module模式",
+    "href": "/javascript/module"
   } 
 
 ])

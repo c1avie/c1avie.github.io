@@ -16,6 +16,10 @@
     
     
     <url>
+        <loc>/javascript/module</loc>
+    </url>
+    
+    <url>
         <loc>/javascript/prototype-constructor</loc>
     </url>
     

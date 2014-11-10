@@ -1,6 +1,14 @@
 [
 	
 		{
+		  "title"      : "Module模式",
+		  "category"   : "JavaScript",
+		  "url"        : "/javascript/module",
+		  "date"       : "2014-11-06 00:00:00 -0500",
+		  "shortdate"  : "November 06, 2014"
+		} ,
+	
+		{
 		  "title"      : "带原型的Constructor",
 		  "category"   : "JavaScript",
 		  "url"        : "/javascript/prototype-constructor",
