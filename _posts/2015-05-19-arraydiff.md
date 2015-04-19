@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 两个数组取相同的部分
-description: "算法优化"
+title: 一周总结
+description: "总结"
 category: JavaScript
-tags: [算法]
+tags: [总结]
 imagefeature: 
 comments: true
 share: true
@@ -51,3 +51,50 @@ switch(menu_theme) {
 		dynamicLoading.css("assets/css/boss_ace.css");
 }
 {% endhighlight %}
+
+因为菜单是动态拉取数据显示出来的，还需要权限控制，因为需要两个post请求。之前我是先等第一次请求success之后再请求权限，这样就会比较慢。
+angular有个$q.all,then的用法，可以将两个请求异步的进行
+{% highlight javascript %}
+$q.all([
+	$http.post(url,data).success(function() {
+
+	}),
+	$http.post(auth_url,data).success(function() {
+
+	}),
+]).then(function() {
+	
+});
+{% endhighlight %}
+
+权限控制这一块需要对比两个数组，取相同的部分，开始用的是双重循环，这样效率比较低
+{% highlight javascript %}
+Array.prototype.in_array = function(e) { 
+	for(i = 0;i < this.length;i++) { 
+		if(this[i] == e) return true; 
+	} 
+	return false; 
+}
+
+var powers = result.data.powers;
+var newZnodes = new Array();
+for(var i = 0;i < zNodes.length;i++) {
+	var flag = powers.in_array(zNodes[i].access);
+	if(flag) {
+		newZnodes.push(zNodes[i]);
+	}
+}
+{% endhighlight %}
+
+后面就又想着将其中一个数组变为字符串，用字符串的indexOf方法进行查找
+{% highlight javascript %}
+var newZnodes = new Array();
+for(var i = 0;i < zNodes.length;i++) {
+	var val = zNodes[i].access;
+	if(powers.indexOf(val) != -1) {
+		newZnodes.push(zNodes[i]);
+	}
+}
+{% endhighlight %}
+
+
